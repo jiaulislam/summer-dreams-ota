@@ -1,0 +1,16 @@
+{
+  "HomePage": {
+    "title": "Welcome to Summer Dreams Travel Agency",
+    "description": "Your dream vacation starts here."
+  },
+  "Flights": {
+    "title": "Available Flights",
+    "loading": "Loading flights...",
+    "error": "Error loading flights",
+    "select": "Select"
+  },
+  "Auth": {
+    "loginTitle": "Sign In",
+    "loginAsAdmin": "Log in with Admin Credentials"
+  }
+}
