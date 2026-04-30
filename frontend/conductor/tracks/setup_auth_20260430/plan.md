@@ -4,7 +4,7 @@
 - [x] Task: Configure NextAuth.js v5 with Credentials Provider (714f9bf)
     - [ ] Update `src/auth.ts` to include robust `authorize` logic calling the Django backend.
     - [ ] Configure `jwt` and `session` callbacks to persist access and refresh tokens.
-- [~] Task: Implement Login and Signup Pages
+- [x] Task: Implement Login and Signup Pages (939abff)
     - [ ] Create the signup page in `src/app/[locale]/(auth)/signup/page.tsx`.
     - [ ] Enhance the existing login page with form validation and error handling.
 - [ ] Task: Protect Private Routes
