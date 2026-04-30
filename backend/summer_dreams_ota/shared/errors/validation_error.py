@@ -1,5 +1,5 @@
-from .base import AbstractError, ErrorBody
-from .constants import ErrorCodeEnum, StrOrPromise
+from summer_dreams_ota.shared.errors.base import AbstractError, ErrorBody
+from summer_dreams_ota.shared.errors.constants import ErrorCodeEnum, StrOrPromise
 
 
 class ValidationError(AbstractError):

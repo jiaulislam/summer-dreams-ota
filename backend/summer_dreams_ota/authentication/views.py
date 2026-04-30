@@ -33,12 +33,6 @@ class SignupView(APIView):
         email = serializer.validated_data["email"]
         password = serializer.validated_data["password"]
 
-        # Check if user already exists
-        from summer_dreams_ota.users.models import User
-
-        if User.objects.filter(email=email).exists():
-            return Response({"email": ["A user with this email already exists."]}, status=status.HTTP_400_BAD_REQUEST)
-
         extra_fields = {
             "first_name": serializer.validated_data.get("first_name", ""),
             "last_name": serializer.validated_data.get("last_name", ""),

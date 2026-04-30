@@ -1,9 +1,10 @@
+import re
 from typing import Any
 
 from rest_framework.exceptions import ErrorDetail
 
-from .base import AbstractError, ErrorBody
-from .constants import ErrorCodeEnum
+from summer_dreams_ota.shared.errors.base import AbstractError, ErrorBody
+from summer_dreams_ota.shared.errors.constants import ErrorCodeEnum
 
 
 class SerializerError(AbstractError):
@@ -98,8 +99,6 @@ class SerializerError(AbstractError):
 
         # Handle ErrorDetail representation in string form
         if "ErrorDetail(string=" in error_str:
-            import re
-
             match = re.search(r"ErrorDetail\(string='([^']*)'", error_str)
             if match:
                 return match.group(1)

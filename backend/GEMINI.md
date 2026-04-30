@@ -83,11 +83,21 @@ To avoid root namespace pollution, all new domain apps must be nested within `su
 3.  **Configure:** In `apps.py`, set `name = 'summer_dreams_ota.<app-name>'`.
 4.  **Register:** Use the full path (`summer_dreams_ota.<app-name>`) in `INSTALLED_APPS`.
 
-### 3. Coding Conventions
+### 4. Coding Conventions
+*   **Imports:**
+    *   ALL imports MUST be at the top module level. Never perform imports inside functions, methods, or other local scopes.
+    *   **Absolute Paths:** Always use absolute import paths (e.g., `from summer_dreams_ota.authentication.errors import UserAlreadyExistsError`) instead of relative imports (e.g., `from .errors import ...`).
 *   **Type Annotations:**
     *   Use Python type annotations for all models, serializers, and services.
+
     *   **Union Types:** Always use the `|` operator for union type annotations (e.g., `str | None`) instead of `Union` from the `typing` module.
 *   **Constants:** App-level constants must be stored in `constants.py`.
+
+### 5. Error Handling Protocol
+*   **Centralized Handler:** Use the `custom_exception_handler` from `summer_dreams_ota.shared`.
+*   **Shared Errors:** Use `SerializerError` and `NotFoundError` from `summer_dreams_ota.shared.errors` for standard validation and 404 scenarios.
+*   **App-Specific Errors:** Each app MUST have its own `errors.py` file.
+*   **Service Errors:** Service-level business logic failures must use custom error classes defined in the app's `errors.py`, subclassing `AbstractError` from `shared`.
 
 *   **Query Optimization:** Use `select_related` and `prefetch_related` to prevent N+1 queries.
 *   **Logging:**

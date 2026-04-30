@@ -4,6 +4,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.contrib.auth import authenticate
 
+from summer_dreams_ota.authentication.errors import UserAlreadyExistsError
 from summer_dreams_ota.users.models import User
 
 
@@ -35,4 +36,7 @@ class AuthService:
         """
         Create a new user with email and password.
         """
+        if User.objects.filter(email=email).exists():
+            raise UserAlreadyExistsError(email)
+
         return User.objects.create_user(email=email, password=password, **extra_fields)
