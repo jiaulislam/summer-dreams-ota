@@ -34,7 +34,7 @@ export function LoginForm() {
       setLoading(false);
     } else {
       toast.success(t("loginTitle"));
-      router.push("/");
+      router.push("/dashboard");
     }
   };
 
