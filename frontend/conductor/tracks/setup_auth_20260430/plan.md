@@ -1,7 +1,7 @@
 # Implementation Plan: Authentication Setup
 
 ## Phase 1: Foundation & Credentials Auth
-- [ ] Task: Configure NextAuth.js v5 with Credentials Provider
+- [~] Task: Configure NextAuth.js v5 with Credentials Provider
     - [ ] Update `src/auth.ts` to include robust `authorize` logic calling the Django backend.
     - [ ] Configure `jwt` and `session` callbacks to persist access and refresh tokens.
 - [ ] Task: Implement Login and Signup Pages

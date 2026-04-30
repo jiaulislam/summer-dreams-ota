@@ -1,4 +1,3 @@
-import { apiClient } from "@/lib/api-client";
 import { Flight } from "@/types";
 
 export const getFlights = async (): Promise<Flight[]> => {

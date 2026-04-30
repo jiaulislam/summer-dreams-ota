@@ -1,5 +1,8 @@
-import NextAuth from "next-auth";
+import NextAuth, { User as NextAuthUser } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { User } from "@/types";
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -9,22 +12,46 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        // Here you would normally call your Django backend
-        // For now, returning a mock user
-        if (credentials?.email === "admin@example.com" && credentials?.password === "password") {
-          return { id: "1", name: "Admin", email: "admin@example.com", accessToken: "mock-access", refreshToken: "mock-refresh" };
+        if (!credentials?.email || !credentials?.password) return null;
+
+        try {
+          const res = await fetch(`${API_BASE_URL}/login/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          });
+
+          if (!res.ok) {
+            return null;
+          }
+
+          const data = await res.json();
+
+          return {
+            id: data.id || data.user?.id,
+            name: data.name || data.user?.name,
+            email: data.email || data.user?.email,
+            accessToken: data.access || data.accessToken,
+            refreshToken: data.refresh || data.refreshToken,
+          } as User & NextAuthUser;
+        } catch (error) {
+          console.error("Auth error:", error);
+          return null;
         }
-        return null;
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        const u = user as unknown as User;
         return {
           ...token,
-          accessToken: (user as any).accessToken,
-          refreshToken: (user as any).refreshToken,
+          accessToken: u.accessToken,
+          refreshToken: u.refreshToken,
         };
       }
       return token;
