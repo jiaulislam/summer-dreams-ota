@@ -25,7 +25,7 @@ export function SignupForm() {
     const password = formData.get("password") as string;
 
     try {
-      const res = await fetch(`${API_URL}/signup/`, {
+      const res = await fetch(`${API_URL}/auth/signup/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
