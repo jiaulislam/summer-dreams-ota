@@ -12,7 +12,7 @@
 - [x] Task: Conductor - User Manual Verification 'Foundation & Credentials Auth' (Protocol in workflow.md)
 
 ## Phase 2: JWT Lifecycle & 401 Interception
-- [~] Task: Enhance API Client with Token Rotation
+- [x] Task: Enhance API Client with Token Rotation (0f84f74)
     - [ ] Refactor `src/lib/api-client.ts` to implement the intercept-refresh-retry logic.
     - [ ] Ensure `signOut` is called if the refresh token expires or the refresh attempt fails.
 - [ ] Task: Test 401 Handling Manually
