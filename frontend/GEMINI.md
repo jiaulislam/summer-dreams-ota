@@ -12,13 +12,15 @@ Summer Dreams Travel Agency SAC is a high-performance, accessible, and SEO-optim
 - **Authentication:** NextAuth.js (Auth.js) v5 with JWT integration
 - **Localization:** `next-intl` (supporting multi-locale routing)
 
-## Architectural Principles
-- **Server-First:** Default to React Server Components (RSC) to minimize client-side JS. Use Client Components only for interactivity or browser APIs.
-- **Feature-Based Structure:** Code is organized by feature rather than technical type (e.g., `src/features/flights/`).
-- **Decoupled API Client:** A custom `apiClient` (`src/lib/api-client.ts`) wraps the native `fetch` API, providing:
-    - Centralized error handling.
-    - Automatic token rotation (401 interception and refresh).
-    - Session-aware header attachment.
+## Development Conventions
+### Architectural Principles
+- **DRY (Don't Repeat Yourself):** Centralize configurations and reusable logic.
+- **Lean Page Components:** Page components in `src/app/` should be lean, primarily acting as entry points and using feature-specific components for logic and UI.
+- **API Configuration:** The `NEXT_PUBLIC_API_URL` should point to the root API endpoint (e.g., `.../api`). Versioning (e.g., `/v1`) should be appended dynamically or via centralized constants.
+
+### Directory Structure
+- `src/features/`: Feature-specific logic (api, components, hooks).
+    - `src/features/auth/`: Components like `LoginForm`, `SignupForm`, and auth-related hooks.
 
 ## Building and Running
 ### Development

@@ -1,8 +1,7 @@
 import NextAuth, { User as NextAuthUser } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { User } from "@/types";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+import { API_URL } from "@/lib/constants";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -15,7 +14,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!credentials?.email || !credentials?.password) return null;
 
         try {
-          const res = await fetch(`${API_BASE_URL}/login/`, {
+          const res = await fetch(`${API_URL}/login/`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
