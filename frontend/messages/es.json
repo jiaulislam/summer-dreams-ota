@@ -11,6 +11,18 @@
   },
   "Auth": {
     "loginTitle": "Iniciar Sesión",
-    "loginAsAdmin": "Iniciar sesión como Administrador"
+    "signupTitle": "Crear Cuenta",
+    "emailLabel": "Correo Electrónico",
+    "passwordLabel": "Contraseña",
+    "nameLabel": "Nombre Completo",
+    "submitLogin": "Iniciar Sesión",
+    "submitSignup": "Crear Cuenta",
+    "loginAsAdmin": "Iniciar sesión como Administrador",
+    "noAccount": "¿No tienes una cuenta?",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "gotoSignup": "Registrarse",
+    "gotoLogin": "Iniciar Sesión",
+    "authError": "Error de autenticación. Por favor, verifique sus credenciales.",
+    "signupError": "Error al crear la cuenta. Por favor, inténtelo de nuevo."
   }
 }

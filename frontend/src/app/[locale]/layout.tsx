@@ -7,6 +7,7 @@ import QueryProvider from "@/providers/query-provider";
 import AuthProvider from "@/providers/auth-provider";
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,7 @@ export default async function RootLayout({
             </QueryProvider>
           </AuthProvider>
         </NextIntlClientProvider>
+        <Toaster />
       </body>
     </html>
   );

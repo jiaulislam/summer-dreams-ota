@@ -11,6 +11,18 @@
   },
   "Auth": {
     "loginTitle": "Sign In",
-    "loginAsAdmin": "Log in with Admin Credentials"
+    "signupTitle": "Create Account",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "nameLabel": "Full Name",
+    "submitLogin": "Sign In",
+    "submitSignup": "Create Account",
+    "loginAsAdmin": "Log in with Admin Credentials",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "gotoSignup": "Sign Up",
+    "gotoLogin": "Sign In",
+    "authError": "Authentication failed. Please check your credentials.",
+    "signupError": "Account creation failed. Please try again."
   }
 }
