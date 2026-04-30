@@ -1,4 +1,5 @@
 import logging
+from typing import Any, cast
 
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
@@ -30,12 +31,13 @@ class SignupView(APIView):
             logger.warning(f"Signup validation failed: {serializer.errors}")
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        email = serializer.validated_data["email"]
-        password = serializer.validated_data["password"]
+        validated_data = cast(dict[str, Any], serializer.validated_data)
+        email = validated_data["email"]
+        password = validated_data["password"]
 
         extra_fields = {
-            "first_name": serializer.validated_data.get("first_name", ""),
-            "last_name": serializer.validated_data.get("last_name", ""),
+            "first_name": validated_data.get("first_name", ""),
+            "last_name": validated_data.get("last_name", ""),
         }
 
         user = AuthService.signup_user(email, password, **extra_fields)
@@ -58,8 +60,9 @@ class LoginView(APIView):
             logger.warning(f"Login validation failed: {serializer.errors}")
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        email = serializer.validated_data["email"]
-        password = serializer.validated_data["password"]
+        validated_data = cast(dict[str, Any], serializer.validated_data)
+        email = validated_data["email"]
+        password = validated_data["password"]
 
         user = AuthService.authenticate_user(email, password)
         if user is not None:
