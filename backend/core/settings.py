@@ -29,7 +29,11 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-SUMMER_DREAMS_OTA_APPS = ["summer_dreams_ota.users"]
+SUMMER_DREAMS_OTA_APPS = [
+    "summer_dreams_ota.shared",
+    "summer_dreams_ota.users",
+    "summer_dreams_ota.authentication",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -38,12 +42,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # Third party apps
     "rest_framework",
+    "rest_framework.authtoken",
     "corsheaders",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "drf_spectacular",
 ]
 
@@ -52,6 +61,7 @@ INSTALLED_APPS += SUMMER_DREAMS_OTA_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -65,13 +75,41 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
+# DRF Settings
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ("dj_rest_auth.jwt_auth.JWTCookieAuthentication",),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# JWT Settings
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "jwt-auth",
+    "JWT_AUTH_REFRESH_COOKIE": "jwt-refresh",
+    "JWT_AUTH_HTTPONLY": False,  # Set to True in production
+}
+
 # allauth settings
-ACCOUNT_LOGIN_METHODS = {"email"}
-ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_VERIFICATION = "none"  # Adjust as needed for production
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 
 AUTH_USER_MODEL = "users.User"
+
+# Social Auth Providers
+GOOGLE_OAUTH_CALLBACK_URL = "http://localhost:3000/api/auth/callback/google"
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+    }
+}
 
 
 TEMPLATES = [
@@ -90,6 +128,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
+
+ROOT_URLCONF = "core.urls"
+
+SITE_ID = 1
 
 
 # Database

@@ -5,21 +5,26 @@ description = "Backend for Summer Dreams OTA"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "cryptography>=47.0.0",
+    "dj-rest-auth>=7.2.0",
     "django>=6.0.4",
     "django-allauth>=65.16.1",
     "django-cors-headers>=4.9.0",
     "django-filter>=25.2",
     "djangorestframework>=3.17.1",
+    "djangorestframework-simplejwt>=5.5.1",
     "drf-spectacular>=0.29.0",
     "gunicorn>=25.3.0",
     "psycopg>=3.3.3",
     "python-dotenv>=1.2.2",
+    "requests>=2.33.1",
     "sentry-sdk>=2.58.0",
 ]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
 exclude = [
+    ".gemini",
     "**/migrations/*",
     ".bzr",
     ".direnv",
@@ -53,8 +58,8 @@ exclude = [
 line-length = 120
 indent-width = 4
 
-# Assume Python 3.14
-target-version = "py314"
+# Assume Python 3.14 (but ruff supports up to 3.13)
+target-version = "py313"
 
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
@@ -78,7 +83,7 @@ fixable = ["ALL"]
 unfixable = []
 
 # Allow unused variables when underscore-prefixed.
-dummy-variable-rgx = "^(_+|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+dummy-variable-rgx = "^(_+|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?)|args|kwargs)$"
 
 [tool.ruff.format]
 # Like Black, use double quotes for strings.

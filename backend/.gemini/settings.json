@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "AfterTool": [
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "name": "ruff-fix",
+            "type": "command",
+            "command": "python3 .gemini/hooks/ruff_fix.py",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}
