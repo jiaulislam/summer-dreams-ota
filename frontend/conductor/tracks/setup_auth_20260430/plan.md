@@ -1,15 +1,15 @@
 # Implementation Plan: Authentication Setup
 
-## Phase 1: Foundation & Credentials Auth
+## Phase 1: Foundation & Credentials Auth [checkpoint: c9555d3]
 - [x] Task: Configure NextAuth.js v5 with Credentials Provider (714f9bf)
-    - [ ] Update `src/auth.ts` to include robust `authorize` logic calling the Django backend.
-    - [ ] Configure `jwt` and `session` callbacks to persist access and refresh tokens.
+    - [x] Update `src/auth.ts` to include robust `authorize` logic calling the Django backend.
+    - [x] Configure `jwt` and `session` callbacks to persist access and refresh tokens.
 - [x] Task: Implement Login and Signup Pages (939abff)
-    - [ ] Create the signup page in `src/app/[locale]/(auth)/signup/page.tsx`.
-    - [ ] Enhance the existing login page with form validation and error handling.
+    - [x] Create the signup page in `src/app/[locale]/(auth)/signup/page.tsx`.
+    - [x] Enhance the existing login page with form validation and error handling.
 - [x] Task: Protect Private Routes (303e24e)
-    - [ ] Update `src/proxy.ts` to enforce session requirements on sensitive routes like `/dashboard`.
-- [ ] Task: Conductor - User Manual Verification 'Foundation & Credentials Auth' (Protocol in workflow.md)
+    - [x] Update `src/proxy.ts` to enforce session requirements on sensitive routes like `/dashboard`.
+- [x] Task: Conductor - User Manual Verification 'Foundation & Credentials Auth' (Protocol in workflow.md)
 
 ## Phase 2: JWT Lifecycle & 401 Interception
 - [ ] Task: Enhance API Client with Token Rotation
