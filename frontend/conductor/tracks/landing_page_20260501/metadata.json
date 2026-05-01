@@ -1,0 +1,8 @@
+{
+  "track_id": "landing_page_20260501",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-05-01T00:00:00Z",
+  "updated_at": "2026-05-01T00:00:00Z",
+  "description": "Develop a high-performance, responsive landing page for Summer Dreams Travel Agency using Next.js, Tailwind CSS, and Framer Motion based on the provided design specifications (Hero with booking widget, Tour Packages Carousel, Popular Destinations Slider, Why Choose Us Accordion, and Global Footer)."
+}
