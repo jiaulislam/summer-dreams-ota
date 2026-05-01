@@ -44,9 +44,9 @@ export function WhyChooseUs() {
               <div className="h-1.5 w-20 bg-brand-primary rounded-full mx-auto lg:mx-0" />
             </div>
 
-            <Accordion type="single" collapsible className="w-full space-y-4 border-none">
+            <Accordion className="w-full space-y-4">
               <AccordionItem value="trusted" className="border rounded-2xl px-6 py-2 shadow-sm data-[state=open]:border-brand-primary/30 data-[state=open]:bg-brand-primary/5 transition-all duration-300">
-                <AccordionTrigger className="hover:no-underline py-4">
+                <AccordionTrigger className="hover:no-underline py-4 flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="h-10 w-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
                       <ShieldCheck size={24} />
@@ -60,7 +60,7 @@ export function WhyChooseUs() {
               </AccordionItem>
 
               <AccordionItem value="booknow" className="border rounded-2xl px-6 py-2 shadow-sm data-[state=open]:border-brand-primary/30 data-[state=open]:bg-brand-primary/5 transition-all duration-300">
-                <AccordionTrigger className="hover:no-underline py-4">
+                <AccordionTrigger className="hover:no-underline py-4 flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="h-10 w-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
                       <CalendarClock size={24} />
@@ -74,7 +74,7 @@ export function WhyChooseUs() {
               </AccordionItem>
 
               <AccordionItem value="checkout" className="border rounded-2xl px-6 py-2 shadow-sm data-[state=open]:border-brand-primary/30 data-[state=open]:bg-brand-primary/5 transition-all duration-300">
-                <AccordionTrigger className="hover:no-underline py-4">
+                <AccordionTrigger className="hover:no-underline py-4 flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="h-10 w-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
                       <Zap size={24} />

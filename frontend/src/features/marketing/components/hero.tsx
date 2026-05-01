@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { BookingWidget } from "./booking-widget";
+import { cn } from "@/lib/utils";
 
 interface HeroProps {
   children?: React.ReactNode;
@@ -36,13 +37,15 @@ export function Hero({ children }: HeroProps) {
             </span>
           </Link>
 
-          <Button
-            asChild
-            variant="ghost"
-            className="text-white hover:bg-white/20 border border-white/30 rounded-full px-6"
+          <Link
+            href="/login"
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "text-white hover:bg-white/20 border border-white/30 rounded-full px-6"
+            )}
           >
-            <Link href="/login">{t("signIn")}</Link>
-          </Button>
+            {t("signIn")}
+          </Link>
         </div>
       </header>
 

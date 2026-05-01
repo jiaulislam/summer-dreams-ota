@@ -3,12 +3,12 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
+  Globe,
+  Send,
+  Camera,
+  Play,
   Phone,
-  MapPin,
+  Map,
   ArrowUp
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,7 +44,7 @@ export function Footer() {
             </Link>
             <div className="space-y-4 text-gray-400">
               <div className="flex items-start space-x-3">
-                <MapPin size={20} className="text-brand-accent shrink-0 mt-1" />
+                <Map size={20} className="text-brand-accent shrink-0 mt-1" />
                 <p>123 Travel Tower, Dhaka, Bangladesh</p>
               </div>
               <div className="flex items-center space-x-3">
@@ -53,7 +53,7 @@ export function Footer() {
               </div>
             </div>
             <div className="flex space-x-4">
-              {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
+              {[Globe, Send, Camera, Play].map((Icon, i) => (
                 <Link
                   key={i}
                   href="#"

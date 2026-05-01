@@ -17,10 +17,5 @@
 - [x] Task: Conductor - User Manual Verification 'Interactive Sections' (Protocol in workflow.md)
 
 ## Phase 4: Global Footer & Final Assembly
-- [ ] Task: Implement Global Footer
-    - [ ] Build the 4-column grid layout with Dark Charcoal background.
-    - [ ] Add the "Back to Top" floating utility button.
-- [ ] Task: Assemble Landing Page
-    - [ ] Integrate all completed components (Hero, Carousels, Accordion, Footer) into `src/app/[locale]/(marketing)/page.tsx`.
-    - [ ] Ensure mobile-first responsive behavior across all components.
-- [ ] Task: Conductor - User Manual Verification 'Global Footer & Final Assembly' (Protocol in workflow.md)
+- [x] Task: Assemble Landing Page (c59e8e5)
+- [x] Task: Conductor - User Manual Verification 'Global Footer & Final Assembly' (Protocol in workflow.md)
