@@ -10,7 +10,7 @@
 - [x] Task: Implement Booking Widget (06eef54)
 - [x] Task: Conductor - User Manual Verification 'Hero & Booking Widget' (Protocol in workflow.md)
 
-## Phase 3: Interactive Sections
+## Phase 3: Interactive Sections [checkpoint: aeaa5d4]
 - [x] Task: Implement Tour Packages Carousel (0f84f74)
 - [x] Task: Implement Popular Destinations Slider (0f84f74)
 - [x] Task: Implement "Why Choose Us" Accordion (83473f2)
