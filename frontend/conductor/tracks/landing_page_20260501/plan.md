@@ -5,7 +5,7 @@
 - [x] Task: Configure Theme Variables (c9f3ff9)
 - [x] Task: Conductor - User Manual Verification 'Project Setup & Localization' (Protocol in workflow.md)
 
-## Phase 2: Hero & Booking Widget
+## Phase 2: Hero & Booking Widget [checkpoint: b76eebd]
 - [x] Task: Implement Hero Section (59823e4)
 - [x] Task: Implement Booking Widget (06eef54)
 - [x] Task: Conductor - User Manual Verification 'Hero & Booking Widget' (Protocol in workflow.md)
