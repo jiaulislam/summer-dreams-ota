@@ -6,13 +6,9 @@
 - [x] Task: Conductor - User Manual Verification 'Project Setup & Localization' (Protocol in workflow.md)
 
 ## Phase 2: Hero & Booking Widget
-- [ ] Task: Implement Hero Section
-    - [ ] Create the full-bleed travel background layout.
-    - [ ] Implement the transparent glass-effect navigation with brand logo and "Sign In" button.
-- [ ] Task: Implement Booking Widget
-    - [ ] Build the floating white card with Service Tabs and Flight Options.
-    - [ ] Create the 4-column search grid and the bottom-bridged search button (UI only, no API integration).
-- [ ] Task: Conductor - User Manual Verification 'Hero & Booking Widget' (Protocol in workflow.md)
+- [x] Task: Implement Hero Section (59823e4)
+- [x] Task: Implement Booking Widget (06eef54)
+- [x] Task: Conductor - User Manual Verification 'Hero & Booking Widget' (Protocol in workflow.md)
 
 ## Phase 3: Interactive Sections
 - [ ] Task: Implement Tour Packages Carousel
