@@ -16,6 +16,7 @@ export default function DashboardPage() {
               src={session.user.image}
               alt={session.user.name || "User Avatar"}
               fill
+              sizes="96px"
               className="object-cover"
             />
           </div>

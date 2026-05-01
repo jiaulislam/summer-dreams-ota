@@ -62,6 +62,7 @@ export function TourPackages() {
                   src={pkg.image}
                   alt={pkg.name}
                   fill
+                  sizes="(max-width: 768px) 288px, 320px"
                   className="object-cover transition-transform duration-500 hover:scale-110"
                 />
 

@@ -62,17 +62,17 @@ export function SignupForm() {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="first_name">{t("firstNameLabel")}</Label>
-            <Input id="first_name" name="first_name" type="text" required />
+            <Input id="first_name" name="first_name" type="text" required autoComplete="off" />
           </div>
           <div className="space-y-2">
             <Label htmlFor="last_name">{t("lastNameLabel")}</Label>
-            <Input id="last_name" name="last_name" type="text" required />
+            <Input id="last_name" name="last_name" type="text" required autoComplete="off" />
           </div>
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="email">{t("emailLabel")}</Label>
-          <Input id="email" name="email" type="email" required />
+          <Input id="email" name="email" type="email" required autoComplete="off" />
         </div>
 
         <div className="space-y-2">
@@ -84,6 +84,7 @@ export function SignupForm() {
               type={showPassword ? "text" : "password"}
               required
               className="pr-10"
+              autoComplete="new-password"
             />
             <button
               type="button"

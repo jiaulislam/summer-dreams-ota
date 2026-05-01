@@ -21,7 +21,7 @@ const DESTINATIONS = [
     id: 3,
     name: "Tokyo",
     desc: "A bustling metropolis blending tradition and innovation.",
-    image: "https://images.unsplash.com/photo-1540959733332-e94e270bde18?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: 4,
@@ -51,6 +51,7 @@ export function PopularDestinations() {
                 src={dest.image}
                 alt={dest.name}
                 fill
+                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
 

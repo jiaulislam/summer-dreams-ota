@@ -10,8 +10,14 @@ import { Link } from "@/i18n/routing";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/routing";
 import { Eye, EyeOff } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export function LoginForm() {
+interface LoginFormProps {
+  className?: string;
+  isModal?: boolean;
+}
+
+export function LoginForm({ className, isModal = false }: LoginFormProps) {
   const t = useTranslations("Auth");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -41,13 +47,24 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md p-8 space-y-6 border rounded-xl shadow-lg bg-white">
+    <div className={cn(
+      "w-full max-w-md p-8 space-y-6",
+      !isModal && "border rounded-xl shadow-lg bg-white",
+      className
+    )}>
       <h1 className="text-3xl font-bold text-center">{t("loginTitle")}</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email">{t("emailLabel")}</Label>
-          <Input id="email" name="email" type="email" required placeholder="admin@example.com" />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="admin@example.com"
+            autoComplete="off"
+          />
         </div>
 
         <div className="space-y-2">
@@ -59,6 +76,7 @@ export function LoginForm() {
               type={showPassword ? "text" : "password"}
               required
               className="pr-10"
+              autoComplete="new-password"
             />
             <button
               type="button"

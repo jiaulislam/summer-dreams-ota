@@ -21,10 +21,11 @@ export function WhyChooseUs() {
           <div className="relative order-2 lg:order-1">
             <div className="relative rounded-[40px] overflow-hidden border-8 border-brand-primary/10 shadow-[0_0_50px_rgba(128,0,0,0.15)] group">
               <Image
-                src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8df6?auto=format&fit=crop&q=80&w=2070"
+                src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2070"
                 alt="Why Choose Us"
                 width={800}
                 height={1000}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-brand-primary/5 group-hover:bg-transparent transition-colors duration-500" />
