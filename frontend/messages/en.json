@@ -14,7 +14,8 @@
     "signupTitle": "Create Account",
     "emailLabel": "Email Address",
     "passwordLabel": "Password",
-    "nameLabel": "Full Name",
+    "firstNameLabel": "First Name",
+    "lastNameLabel": "Last Name",
     "submitLogin": "Sign In",
     "submitSignup": "Create Account",
     "loginAsAdmin": "Log in with Admin Credentials",
@@ -24,5 +25,50 @@
     "gotoLogin": "Sign In",
     "authError": "Authentication failed. Please check your credentials.",
     "signupError": "Account creation failed. Please try again."
+  },
+  "Hero": {
+    "signIn": "Sign In",
+    "flight": "Flight",
+    "visa": "Visa",
+    "holiday": "Holiday",
+    "oneWay": "One Way",
+    "roundTrip": "Round Trip",
+    "from": "From",
+    "to": "To",
+    "date": "Date",
+    "passengers": "Passengers",
+    "search": "Search"
+  },
+  "TourPackages": {
+    "title": "Our Tour Packages",
+    "viewAll": "View All Packages",
+    "startsFrom": "Starts From"
+  },
+  "Destinations": {
+    "title": "Popular Tourist Destinations"
+  },
+  "WhyChooseUs": {
+    "title": "Why Choose Summer Dreams",
+    "trustedBrand": "Trusted Brand",
+    "bookNowPayLater": "Book Now Pay Later",
+    "seamlessCheckout": "Seamless Checkout",
+    "trustedBrandDesc": "We are a registered and authorized travel agency with years of experience.",
+    "bookNowPayLaterDesc": "Flexibility to book your dream vacation now and pay at your convenience.",
+    "seamlessCheckoutDesc": "Fast, secure, and hassle-free payment and booking process."
+  },
+  "Footer": {
+    "discover": "Discover",
+    "support": "Support",
+    "travel": "Travel",
+    "aboutUs": "About Us",
+    "blogs": "Blogs",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "privacy": "Privacy",
+    "refund": "Refund",
+    "flightBooking": "Flight Booking",
+    "hotelBooking": "Hotel Booking",
+    "emi": "EMI Info",
+    "backToTop": "Back to Top"
   }
 }

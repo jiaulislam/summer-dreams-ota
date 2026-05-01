@@ -14,7 +14,8 @@
     "signupTitle": "Crear Cuenta",
     "emailLabel": "Correo Electrónico",
     "passwordLabel": "Contraseña",
-    "nameLabel": "Nombre Completo",
+    "firstNameLabel": "Nombre",
+    "lastNameLabel": "Apellido",
     "submitLogin": "Iniciar Sesión",
     "submitSignup": "Crear Cuenta",
     "loginAsAdmin": "Iniciar sesión como Administrador",
@@ -24,5 +25,50 @@
     "gotoLogin": "Iniciar Sesión",
     "authError": "Error de autenticación. Por favor, verifique sus credenciales.",
     "signupError": "Error al crear la cuenta. Por favor, inténtelo de nuevo."
+  },
+  "Hero": {
+    "signIn": "Iniciar Sesión",
+    "flight": "Vuelo",
+    "visa": "Visa",
+    "holiday": "Vacaciones",
+    "oneWay": "Solo ida",
+    "roundTrip": "Ida y vuelta",
+    "from": "Desde",
+    "to": "Hacia",
+    "date": "Fecha",
+    "passengers": "Pasajeros",
+    "search": "Buscar"
+  },
+  "TourPackages": {
+    "title": "Nuestros Paquetes Turísticos",
+    "viewAll": "Ver todos los paquetes",
+    "startsFrom": "Desde"
+  },
+  "Destinations": {
+    "title": "Destinos Turísticos Populares"
+  },
+  "WhyChooseUs": {
+    "title": "Por qué elegir Summer Dreams",
+    "trustedBrand": "Marca de Confianza",
+    "bookNowPayLater": "Reserve Ahora, Pague Después",
+    "seamlessCheckout": "Pago Fluido",
+    "trustedBrandDesc": "Somos una agencia de viajes registrada y autorizada con años de experiencia.",
+    "bookNowPayLaterDesc": "Flexibilidad para reservar sus vacaciones soñadas ahora y pagar a su conveniencia.",
+    "seamlessCheckoutDesc": "Proceso de pago y reserva rápido, seguro y sin complicaciones."
+  },
+  "Footer": {
+    "discover": "Descubrir",
+    "support": "Soporte",
+    "travel": "Viajes",
+    "aboutUs": "Sobre Nosotros",
+    "blogs": "Blogs",
+    "contact": "Contacto",
+    "faq": "Preguntas Frecuentes",
+    "privacy": "Privacidad",
+    "refund": "Reembolso",
+    "flightBooking": "Reserva de Vuelos",
+    "hotelBooking": "Reserva de Hoteles",
+    "emi": "Información de EMI",
+    "backToTop": "Volver arriba"
   }
 }
