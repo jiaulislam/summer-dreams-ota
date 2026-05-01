@@ -1,0 +1,61 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block userlinks %}
+    {{ block.super }}
+
+    {% get_current_language as LANGUAGE_CODE %}
+
+    <div style="display: inline-block; vertical-align: middle; margin-left: 15px; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 15px;">
+        <style>
+            .admin-lang-toggle {
+                display: flex;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 20px;
+                padding: 2px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                cursor: pointer;
+            }
+            .admin-lang-btn {
+                padding: 3px 12px;
+                font-size: 10px;
+                font-weight: 800;
+                border-radius: 18px;
+                transition: all 0.2s;
+                color: rgba(255, 255, 255, 0.6) !important;
+                text-decoration: none !important;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                line-height: 1.2;
+            }
+            .admin-lang-btn.active {
+                background: #fff;
+                color: #417690 !important; /* Django Admin Blue */
+                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            }
+            .admin-lang-btn:hover:not(.active) {
+                color: #fff !important;
+            }
+        </style>
+
+        <form action="{% url 'set_language' %}" method="post" id="admin-lang-form" style="margin: 0;">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <input name="language" type="hidden" id="admin-lang-input">
+
+            <div class="admin-lang-toggle">
+                <button type="button"
+                        onclick="document.getElementById('admin-lang-input').value='en'; document.getElementById('admin-lang-form').submit();"
+                        class="admin-lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}">
+                    EN
+                </button>
+                <button type="button"
+                        onclick="document.getElementById('admin-lang-input').value='es'; document.getElementById('admin-lang-form').submit();"
+                        class="admin-lang-btn {% if LANGUAGE_CODE == 'es' %}active{% endif %}">
+                    ES
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
