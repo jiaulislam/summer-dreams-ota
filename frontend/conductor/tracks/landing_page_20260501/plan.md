@@ -11,16 +11,10 @@
 - [x] Task: Conductor - User Manual Verification 'Hero & Booking Widget' (Protocol in workflow.md)
 
 ## Phase 3: Interactive Sections
-- [ ] Task: Implement Tour Packages Carousel
-    - [ ] Build the horizontal slider with destination image cards and red gradient overlays.
-    - [ ] Add the central "View All Packages" button.
-- [ ] Task: Implement Popular Destinations Slider
-    - [ ] Build the vertically oriented image cards.
-    - [ ] Implement the hover/active state interaction (width expansion, white content box reveal).
-- [ ] Task: Implement "Why Choose Us" Accordion
-    - [ ] Create the two-column layout with the featured glowing image.
-    - [ ] Build the interactive accordion list using Tailwind CSS transitions for height expansion/collapse.
-- [ ] Task: Conductor - User Manual Verification 'Interactive Sections' (Protocol in workflow.md)
+- [x] Task: Implement Tour Packages Carousel (0f84f74)
+- [x] Task: Implement Popular Destinations Slider (0f84f74)
+- [x] Task: Implement "Why Choose Us" Accordion (83473f2)
+- [x] Task: Conductor - User Manual Verification 'Interactive Sections' (Protocol in workflow.md)
 
 ## Phase 4: Global Footer & Final Assembly
 - [ ] Task: Implement Global Footer
