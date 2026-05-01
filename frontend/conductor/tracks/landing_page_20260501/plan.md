@@ -16,6 +16,6 @@
 - [x] Task: Implement "Why Choose Us" Accordion (83473f2)
 - [x] Task: Conductor - User Manual Verification 'Interactive Sections' (Protocol in workflow.md)
 
-## Phase 4: Global Footer & Final Assembly
+## Phase 4: Global Footer & Final Assembly [checkpoint: 77237d8]
 - [x] Task: Assemble Landing Page (c59e8e5)
 - [x] Task: Conductor - User Manual Verification 'Global Footer & Final Assembly' (Protocol in workflow.md)
