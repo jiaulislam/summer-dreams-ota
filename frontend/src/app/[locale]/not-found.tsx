@@ -2,7 +2,7 @@
 
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
-import { Home, Search, Map } from "lucide-react";
+import { Home, Map } from "lucide-react";
 import Image from "next/image";
 
 export default function NotFound() {
@@ -34,15 +34,15 @@ export default function NotFound() {
             </div>
 
             <div className="space-y-3">
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">
+              <h1 className="text-3xl font-black text-gray-900 tracking-tight text-balance">
                 Lost in Paradise?
               </h1>
-              <p className="text-lg text-gray-500 leading-relaxed max-w-xs mx-auto">
+              <p className="text-lg text-gray-500 leading-relaxed max-w-xs mx-auto text-balance">
                 The page you are looking for has either drifted away or never existed. Let's get you back on track.
               </p>
             </div>
 
-            <div className="flex flex-col w-full space-y-3 pt-4">
+            <div className="flex flex-col w-full pt-4">
               <Button
                 render={<Link href="/" />}
                 size="lg"
@@ -50,17 +50,6 @@ export default function NotFound() {
               >
                 <Home size={20} className="mr-2" />
                 Back to Home
-              </Button>
-
-              <Button
-                variant="ghost"
-                size="lg"
-                className="w-full rounded-full h-14 text-gray-500 hover:text-gray-900"
-              >
-                <div className="flex items-center justify-center space-x-2">
-                  <Search size={20} />
-                  <span>Search Destinations</span>
-                </div>
               </Button>
             </div>
           </div>
