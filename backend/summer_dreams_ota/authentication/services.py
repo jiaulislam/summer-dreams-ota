@@ -14,7 +14,7 @@ class AuthService:
     """
 
     @staticmethod
-    def get_tokens_for_user(user: User) -> dict[str, str]:
+    def get_tokens_for_user(user: User) -> dict[str, Any]:
         """
         Generate access and refresh tokens for a given user.
         """
@@ -22,6 +22,12 @@ class AuthService:
         return {
             "refresh": str(refresh),
             "access": str(refresh.access_token),
+            "user": {
+                "id": str(user.pk),
+                "email": str(user.email),
+                "first_name": str(user.first_name),
+                "last_name": str(user.last_name),
+            },
         }
 
     @staticmethod

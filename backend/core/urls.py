@@ -32,6 +32,7 @@ urlpatterns = [
         include(
             [
                 path("auth/", include("summer_dreams_ota.authentication.urls")),
+                path("auth/", include("dj_rest_auth.urls")),
                 # Schema and Docs
                 path("schema/", SpectacularAPIView.as_view(), name="schema"),
                 path(

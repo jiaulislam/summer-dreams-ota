@@ -10,7 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
+from datetime import timedelta
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +57,7 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "allauth",
     "allauth.account",
+    "allauth.headless",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "drf_spectacular",
@@ -89,18 +96,43 @@ REST_AUTH = {
     "JWT_AUTH_HTTPONLY": False,  # Set to True in production
 }
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(seconds=30),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
+}
+
 # allauth settings
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 
+# Headless/API-only Social Auth settings
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+
 AUTH_USER_MODEL = "users.User"
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
 # Social Auth Providers
+HEADLESS_ONLY = True
 GOOGLE_OAUTH_CALLBACK_URL = "http://localhost:3000/api/auth/callback/google"
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
+        "APPS": [
+            {
+                "client_id": os.getenv("GOOGLE_OAUTH_CLIENT_ID"),
+                "secret": os.getenv("GOOGLE_OAUTH_CLIENT_SECRET"),
+                "key": "",
+            },
+        ],
         "SCOPE": [
             "profile",
             "email",
