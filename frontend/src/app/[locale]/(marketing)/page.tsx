@@ -10,7 +10,7 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <Hero />
-      <main className="flex-grow">
+      <main className="grow">
         <TourPackages />
         <PopularDestinations />
         <WhyChooseUs />
