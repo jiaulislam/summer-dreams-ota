@@ -1,17 +1,20 @@
-import { useTranslations } from 'next-intl';
-import { FlightList } from '@/features/flights/components/flight-list';
+import { useTranslations } from "next-intl";
+import { Hero } from "@/features/marketing/components/hero";
+import { TourPackages } from "@/features/marketing/components/tour-packages";
+import { PopularDestinations } from "@/features/marketing/components/popular-destinations";
+import { WhyChooseUs } from "@/features/marketing/components/why-choose-us";
+import { Footer } from "@/features/marketing/components/footer";
 
 export default function HomePage() {
-  const t = useTranslations('HomePage');
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-24 gap-12">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">{t('title')}</h1>
-        <p className="mt-4 text-xl text-gray-600">{t('description')}</p>
-      </div>
-
-      <FlightList />
-    </main>
+    <div className="flex flex-col min-h-screen">
+      <Hero />
+      <main className="flex-grow">
+        <TourPackages />
+        <PopularDestinations />
+        <WhyChooseUs />
+      </main>
+      <Footer />
+    </div>
   );
 }
