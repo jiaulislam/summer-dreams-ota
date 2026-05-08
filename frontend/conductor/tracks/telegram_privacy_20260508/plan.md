@@ -1,11 +1,11 @@
 # Implementation Plan: Telegram Chat Privacy & Lead Capture
 
 ## Phase 1: State Management and Local Storage
-- [ ] Task: Create Session Management Utility
-    - [ ] Create a utility function (e.g., `lib/session.ts`) to generate a unique UUID.
-    - [ ] Implement functions to `getSession`, `setSession`, and `clearSession` using browser `localStorage`.
-- [ ] Task: Update Chat State Logic
-    - [ ] Modify `FloatingChatWidget` or `ChatWindow` state to track `hasSession` and the user's details.
+- [x] Task: Create Session Management Utility [b2bee6b]
+    - [x] Create a utility function (e.g., `lib/session.ts`) to generate a unique UUID.
+    - [x] Implement functions to `getSession`, `setSession`, and `clearSession` using browser `localStorage`.
+- [x] Task: Update Chat State Logic [31bd02a]
+    - [x] Modify `FloatingChatWidget` or `ChatWindow` state to track `hasSession` and the user's details.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: State Management and Local Storage' (Protocol in workflow.md)
 
 ## Phase 2: Lead Capture UI Implementation
