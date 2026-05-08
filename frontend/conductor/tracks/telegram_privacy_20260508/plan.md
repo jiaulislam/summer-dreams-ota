@@ -13,8 +13,8 @@
     - [x] Create a new component `ChatIntroForm` inside `src/features/marketing/components/`.
     - [x] Include fields for Name (required) and Contact Number (required), styled with `shadcn/ui` Inputs and Labels.
     - [x] Implement form validation and a submission handler.
-- [ ] Task: Integrate Form into Chat Window
-    - [ ] Modify `ChatWindow` to conditionally render `ChatIntroForm` if no session exists, or the actual message interface if a session is present.
+- [x] Task: Integrate Form into Chat Window [4e88aa1]
+    - [x] Modify `ChatWindow` to conditionally render `ChatIntroForm` if no session exists, or the actual message interface if a session is present.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Lead Capture UI Implementation' (Protocol in workflow.md)
 
 ## Phase 3: API Enhancements (Tagging & Filtering)
