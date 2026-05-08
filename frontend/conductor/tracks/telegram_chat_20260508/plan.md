@@ -8,8 +8,7 @@
     - [x] Create `FloatingChatWidget` component in `src/features/marketing/components/`.
     - [x] Create `ChatWindow` component in `src/features/marketing/components/`.
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Setup and Configuration' (Protocol in workflow.md) [0deb9af]
-
-## Phase 2: API Route Implementation
+## Phase 2: API Route Implementation [checkpoint: 05960d9]
 - [x] Task: Create Next.js API Route for Telegram [669b62a]
     - [x] Create `src/app/api/telegram/route.ts` to handle POST requests.
     - [x] Implement logic to forward messages to the Telegram bot API.
@@ -17,13 +16,14 @@
     - [x] Return appropriate success/error responses to the frontend.
 - [x] Task: Implement Mechanism for Receiving Messages [669b62a]
     - [x] Implement logic in the API route to fetch incoming messages (e.g., via Telegram's `getUpdates` method) and expose it via a `GET` request.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: API Route Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: API Route Implementation' (Protocol in workflow.md) [05960d9]
 
 ## Phase 3: Frontend UI and Integration
-- [ ] Task: Build Floating Chat Widget UI
+- [~] Task: Build Floating Chat Widget UI
     - [ ] Implement the rounded chat icon button (fixed position, bottom right).
     - [ ] Add toggle logic (open/close state).
 - [ ] Task: Build Chat Window UI
+...
     - [ ] Create the chat interface (header, message list area, input field, send button) using Tailwind CSS and shadcn/ui styles.
     - [ ] Implement auto-scroll to the bottom of the message list.
 - [ ] Task: Connect Frontend to API Route
