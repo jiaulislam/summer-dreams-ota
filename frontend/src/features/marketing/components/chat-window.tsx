@@ -128,9 +128,8 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
       {/* Messages Area */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scroll-smooth"
-      >
-        {messages.map((msg) => (
+        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scroll-smooth custom-scrollbar"
+      >        {messages.map((msg) => (
           <div
             key={msg.id}
             className={cn(
