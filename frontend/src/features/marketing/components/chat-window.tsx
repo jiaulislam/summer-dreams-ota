@@ -188,7 +188,7 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
       {!session ? (
         <ChatIntroForm onSubmit={handleFormSubmit} />
       ) : (
-        <>
+        <div className="flex-1 flex flex-col min-h-0 animate-in fade-in duration-500">
           {/* Messages Area */}
           <div
             ref={scrollRef}
@@ -248,7 +248,7 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
               </Button>
             </form>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
