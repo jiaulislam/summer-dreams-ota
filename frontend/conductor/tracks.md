@@ -14,5 +14,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Implement Individual Session Tracking for Telegram chat privacy and add a lead capture form (Name & Contact) for first-time users.**
+- [x] **Track: Implement Individual Session Tracking for Telegram chat privacy and add a lead capture form (Name & Contact) for first-time users.**
 *Link: [./tracks/telegram_privacy_20260508/](./tracks/telegram_privacy_20260508/)*
