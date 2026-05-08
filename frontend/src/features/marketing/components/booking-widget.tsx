@@ -4,15 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Plane,
   CreditCard,
-  Palmtree,
-  ArrowLeftRight,
-  Calendar as CalendarIcon,
-  Users,
-  Search
+  Palmtree
 } from "lucide-react";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function BookingWidget() {
