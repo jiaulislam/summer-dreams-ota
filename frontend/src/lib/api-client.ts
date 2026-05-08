@@ -1,0 +1,77 @@
+import { auth, signOut } from "@/auth";
+import { API_URL } from "./constants";
+import { redirect } from "next/navigation";
+
+type FetchOptions = RequestInit & {
+  params?: Record<string, string>;
+};
+
+export async function apiClient(endpoint: string, options: FetchOptions = {}) {
+  const { params, ...customConfig } = options;
+
+  const session = await auth();
+  const accessToken = session?.accessToken;
+
+  const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  const url = new URL(`${API_URL}${cleanEndpoint}`);
+
+  if (params) {
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+  }
+
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    ...customConfig.headers,
+  };
+
+  if (accessToken) {
+    (headers as Record<string, string>)["Authorization"] = `Bearer ${accessToken}`;
+  }
+
+  const config: RequestInit = {
+    ...customConfig,
+    headers,
+  };
+
+  let response = await fetch(url.toString(), config);
+
+  if (response.status === 401) {
+    const refreshToken = session?.refreshToken;
+
+    let refreshSuccessful = false;
+    let newAccessToken = null;
+
+    if (refreshToken) {
+      try {
+        const refreshResponse = await fetch(`${API_URL}/auth/token/refresh/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh: refreshToken }),
+        });
+
+        if (refreshResponse.ok) {
+          const data = await refreshResponse.json();
+          newAccessToken = data.access;
+          refreshSuccessful = true;
+        }
+      } catch {
+        // Silent fail, redirect handled below
+      }
+    }
+
+    if (refreshSuccessful && newAccessToken) {
+      (config.headers as Record<string, string>)["Authorization"] = `Bearer ${newAccessToken}`;
+      response = await fetch(url.toString(), config);
+    } else {
+      await signOut({ redirect: false });
+      redirect("/login");
+    }
+  }
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || errorData.message || "An unexpected error occurred");
+  }
+
+  return response.json();
+}
