@@ -9,5 +9,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: Implement telegram API integration for a floating chat window on the marketing page.**
+- [x] **Track: Implement telegram API integration for a floating chat window on the marketing page.**
 *Link: [./tracks/telegram_chat_20260508/](./tracks/telegram_chat_20260508/)*
