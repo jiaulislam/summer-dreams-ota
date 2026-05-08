@@ -10,23 +10,28 @@ import { useTranslations } from "next-intl";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export function LoginModal() {
+interface LoginModalProps {
+  isScrolled?: boolean;
+}
+
+export function LoginModal({ isScrolled }: LoginModalProps) {
   const t = useTranslations("Hero");
 
   return (
     <Dialog>
-      <DialogTrigger
-        render={
-          <button
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-              "text-white hover:bg-white/20 border border-white/30 rounded-full px-6 transition-all"
-            )}
-          >
-            {t("signIn")}
-          </button>
-        }
-      />
+      <DialogTrigger asChild>
+        <button
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "rounded-full px-6 transition-all duration-300",
+            isScrolled
+              ? "text-gray-900 hover:bg-gray-100 border-gray-200"
+              : "text-white hover:bg-white/20 border-white/30"
+          )}
+        >
+          {t("signIn")}
+        </button>
+      </DialogTrigger>
       <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-white border-none rounded-2xl">
         <LoginForm isModal={true} className="p-6 md:p-8" />
       </DialogContent>
