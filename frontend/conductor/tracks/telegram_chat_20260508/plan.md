@@ -32,8 +32,8 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Frontend UI and Integration' (Protocol in workflow.md) [de602ad]
 
 ## Phase 4: Final Integration and Polish
-- [ ] Task: Integrate Widget into Marketing Page
-    - [ ] Render the `FloatingChatWidget` in the appropriate marketing layout or page.
+- [x] Task: Integrate Widget into Marketing Page [9f9e9ea]
+    - [x] Render the `FloatingChatWidget` in the appropriate marketing layout or page.
 - [ ] Task: UI Polish and Animations
     - [ ] Add smooth enter/exit animations for the chat window.
     - [ ] Ensure responsive design on mobile devices.
