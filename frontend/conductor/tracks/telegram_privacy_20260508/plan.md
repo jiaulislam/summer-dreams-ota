@@ -17,7 +17,7 @@
     - [x] Modify `ChatWindow` to conditionally render `ChatIntroForm` if no session exists, or the actual message interface if a session is present.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Lead Capture UI Implementation' (Protocol in workflow.md) [38b311f]
 
-## Phase 3: API Enhancements (Tagging & Filtering)
+## Phase 3: API Enhancements (Tagging & Filtering) [checkpoint: 6d10ac4]
 - [x] Task: Update POST API Route (Tagging) [7eae780]
     - [x] Modify `src/app/api/telegram/route.ts` (POST) to accept `sessionId`, `name`, and `contact`.
     - [x] Update the Telegram message payload to include a formatted prefix (e.g., `[ID: {sessionId}] {Name}: {message}`).
@@ -25,7 +25,7 @@
 - [x] Task: Update GET API Route (Privacy Filtering) [7eae780]
     - [x] Modify `src/app/api/telegram/route.ts` (GET) to accept a `sessionId` query parameter.
     - [x] Filter the incoming Telegram `getUpdates` array to only return messages that contain the user's specific `sessionId` in the text.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: API Enhancements (Tagging & Filtering)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: API Enhancements (Tagging & Filtering)' (Protocol in workflow.md) [6d10ac4]
 
 ## Phase 4: Frontend Integration & Final Polish
 - [ ] Task: Connect Frontend State to Updated API
