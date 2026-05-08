@@ -19,18 +19,20 @@ export function LoginModal({ isScrolled }: LoginModalProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <button
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "rounded-full px-6 transition-all duration-300",
-            isScrolled
-              ? "text-gray-900 hover:bg-gray-100 border-gray-200"
-              : "text-white hover:bg-white/20 border-white/30"
-          )}
-        >
-          {t("signIn")}
-        </button>
+      <DialogTrigger
+        render={
+          <button
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "rounded-full px-6 transition-all duration-300",
+              isScrolled
+                ? "text-gray-900 hover:bg-gray-100 border-gray-200"
+                : "text-white hover:bg-white/20 border-white/30"
+            )}
+          />
+        }
+      >
+        {t("signIn")}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-white border-none rounded-2xl">
         <LoginForm isModal={true} className="p-6 md:p-8" />
