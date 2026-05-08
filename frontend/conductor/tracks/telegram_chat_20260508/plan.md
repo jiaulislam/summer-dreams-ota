@@ -1,6 +1,6 @@
 # Implementation Plan: Telegram Floating Chat Integration
 
-## Phase 1: Setup and Configuration
+## Phase 1: Setup and Configuration [checkpoint: 0deb9af]
 - [x] Task: Environment Configuration [e1916de]
     - [x] Add `TELEGRAM_BOT_TOKEN` to `.env.local` and `.env.example`.
     - [x] Add `TELEGRAM_CHAT_ID` to `.env.local` and `.env.example`.
