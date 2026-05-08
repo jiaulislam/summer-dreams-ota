@@ -1,0 +1,35 @@
+# Implementation Plan: Telegram Chat Privacy & Lead Capture
+
+## Phase 1: State Management and Local Storage
+- [ ] Task: Create Session Management Utility
+    - [ ] Create a utility function (e.g., `lib/session.ts`) to generate a unique UUID.
+    - [ ] Implement functions to `getSession`, `setSession`, and `clearSession` using browser `localStorage`.
+- [ ] Task: Update Chat State Logic
+    - [ ] Modify `FloatingChatWidget` or `ChatWindow` state to track `hasSession` and the user's details.
+- [ ] Task: Conductor - User Manual Verification 'Phase 1: State Management and Local Storage' (Protocol in workflow.md)
+
+## Phase 2: Lead Capture UI Implementation
+- [ ] Task: Build Intro Form Component
+    - [ ] Create a new component `ChatIntroForm` inside `src/features/marketing/components/`.
+    - [ ] Include fields for Name (required) and Contact Number (required), styled with `shadcn/ui` Inputs and Labels.
+    - [ ] Implement form validation and a submission handler.
+- [ ] Task: Integrate Form into Chat Window
+    - [ ] Modify `ChatWindow` to conditionally render `ChatIntroForm` if no session exists, or the actual message interface if a session is present.
+- [ ] Task: Conductor - User Manual Verification 'Phase 2: Lead Capture UI Implementation' (Protocol in workflow.md)
+
+## Phase 3: API Enhancements (Tagging & Filtering)
+- [ ] Task: Update POST API Route (Tagging)
+    - [ ] Modify `src/app/api/telegram/route.ts` (POST) to accept `sessionId`, `name`, and `contact`.
+    - [ ] Update the Telegram message payload to include a formatted prefix (e.g., `[ID: {sessionId}] {Name}: {message}`).
+    - [ ] Implement logic to send an "Initial Lead Info" message to Telegram immediately upon form submission.
+- [ ] Task: Update GET API Route (Privacy Filtering)
+    - [ ] Modify `src/app/api/telegram/route.ts` (GET) to accept a `sessionId` query parameter.
+    - [ ] Filter the incoming Telegram `getUpdates` array to only return messages that contain the user's specific `sessionId` in the text.
+- [ ] Task: Conductor - User Manual Verification 'Phase 3: API Enhancements (Tagging & Filtering)' (Protocol in workflow.md)
+
+## Phase 4: Frontend Integration & Final Polish
+- [ ] Task: Connect Frontend State to Updated API
+    - [ ] Update the `fetchUpdates` and `handleSendMessage` functions in `ChatWindow` to pass the correct `sessionId`.
+- [ ] Task: UI Polish
+    - [ ] Ensure smooth transitions between the Intro Form and the Chat view.
+- [ ] Task: Conductor - User Manual Verification 'Phase 4: Frontend Integration & Final Polish' (Protocol in workflow.md)

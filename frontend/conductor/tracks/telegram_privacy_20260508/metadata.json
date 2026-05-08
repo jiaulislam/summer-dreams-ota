@@ -1,0 +1,8 @@
+{
+  "track_id": "telegram_privacy_20260508",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-05-08T00:00:00Z",
+  "updated_at": "2026-05-08T00:00:00Z",
+  "description": "Implement Individual Session Tracking for Telegram chat privacy and add a lead capture form (Name & Contact) for first-time users."
+}
