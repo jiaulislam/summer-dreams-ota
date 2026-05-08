@@ -34,7 +34,7 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
     setSession(getChatSession());
   }, []);
 
-  const handleFormSubmit = (data: { name: string; contact: string }) => {
+  const handleFormSubmit = async (data: { name: string; contact: string }) => {
     const newSession: ChatSession = {
       sessionId: generateSessionId(),
       name: data.name,
@@ -53,7 +53,24 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
         timestamp: Date.now(),
       },
     ]);
+
+    // Send initial lead info to Telegram
+    try {
+      await fetch("/api/telegram", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "lead",
+          sessionId: newSession.sessionId,
+          name: newSession.name,
+          contact: newSession.contact,
+        }),
+      });
+    } catch (error) {
+      console.error("Error sending lead notification:", error);
+    }
   };
+
   const [inputValue, setInputValue] = useState("");
   const [isSending, setIsSending] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -67,7 +84,7 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
   }, [messages]);
 
   const handleSendMessage = async () => {
-    if (!inputValue.trim() || isSending) return;
+    if (!inputValue.trim() || isSending || !session) return;
 
     const userMessage: Message = {
       id: Date.now(),
@@ -84,7 +101,11 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
       const response = await fetch("/api/telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage.text }),
+        body: JSON.stringify({
+          message: userMessage.text,
+          sessionId: session.sessionId,
+          name: session.name,
+        }),
       });
 
       if (!response.ok) throw new Error("Failed to send");
@@ -97,8 +118,10 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
   };
 
   const fetchUpdates = useCallback(async () => {
+    if (!session) return;
+
     try {
-      const response = await fetch("/api/telegram");
+      const response = await fetch(`/api/telegram?sessionId=${session.sessionId}`);
       const data = await response.json();
 
       if (data.success && data.messages) {
@@ -106,9 +129,17 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
           .filter((update: any) => update.update_id > lastUpdateIdRef.current)
           .map((update: any) => {
             lastUpdateIdRef.current = Math.max(lastUpdateIdRef.current, update.update_id);
+
+            // Strip the prefix from the display text if present
+            let text = update.message.text || "";
+            const prefix = `[ID: ${session.sessionId}]`;
+            if (text.includes(prefix)) {
+              text = text.split(prefix).pop()?.trim() || text;
+            }
+
             return {
               id: update.update_id,
-              text: update.message.text,
+              text,
               sender: "bot",
               timestamp: update.message.date * 1000,
             };
@@ -121,7 +152,8 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
     } catch (error) {
       console.error("Error fetching updates:", error);
     }
-  }, []);
+  }, [session]);
+
 
   // Poll for updates every 5 seconds
   useEffect(() => {
