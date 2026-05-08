@@ -19,17 +19,16 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: API Route Implementation' (Protocol in workflow.md) [05960d9]
 
 ## Phase 3: Frontend UI and Integration
-- [~] Task: Build Floating Chat Widget UI
-    - [ ] Implement the rounded chat icon button (fixed position, bottom right).
-    - [ ] Add toggle logic (open/close state).
-- [ ] Task: Build Chat Window UI
-...
-    - [ ] Create the chat interface (header, message list area, input field, send button) using Tailwind CSS and shadcn/ui styles.
-    - [ ] Implement auto-scroll to the bottom of the message list.
-- [ ] Task: Connect Frontend to API Route
-    - [ ] Create a hook or service utility to handle API calls (`POST /api/telegram` for sending, `GET /api/telegram` for receiving).
-    - [ ] Wire up the send button to dispatch the message.
-    - [ ] Implement a lightweight polling mechanism to fetch incoming messages periodically while the chat window is open.
+- [x] Task: Build Floating Chat Widget UI [5dd5b46]
+    - [x] Implement the rounded chat icon button (fixed position, bottom right).
+    - [x] Add toggle logic (open/close state).
+- [x] Task: Build Chat Window UI [e21ec59]
+    - [x] Create the chat interface (header, message list area, input field, send button) using Tailwind CSS and shadcn/ui styles.
+    - [x] Implement auto-scroll to the bottom of the message list.
+- [x] Task: Connect Frontend to API Route [e21ec59]
+    - [x] Create a hook or service utility to handle API calls (`POST /api/telegram` for sending, `GET /api/telegram` for receiving).
+    - [x] Wire up the send button to dispatch the message.
+    - [x] Implement a lightweight polling mechanism to fetch incoming messages periodically while the chat window is open.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Frontend UI and Integration' (Protocol in workflow.md)
 
 ## Phase 4: Final Integration and Polish
