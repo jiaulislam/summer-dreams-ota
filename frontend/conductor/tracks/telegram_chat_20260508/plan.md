@@ -7,16 +7,16 @@
 - [x] Task: Create UI Components Structure [5dd5b46]
     - [x] Create `FloatingChatWidget` component in `src/features/marketing/components/`.
     - [x] Create `ChatWindow` component in `src/features/marketing/components/`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Setup and Configuration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Setup and Configuration' (Protocol in workflow.md) [0deb9af]
 
 ## Phase 2: API Route Implementation
-- [ ] Task: Create Next.js API Route for Telegram
-    - [ ] Create `src/app/api/telegram/route.ts` to handle POST requests.
-    - [ ] Implement logic to forward messages to the Telegram bot API.
-    - [ ] Ensure token is read securely from environment variables.
-    - [ ] Return appropriate success/error responses to the frontend.
-- [ ] Task: Implement Mechanism for Receiving Messages
-    - [ ] Implement logic in the API route to fetch incoming messages (e.g., via Telegram's `getUpdates` method) and expose it via a `GET` request.
+- [x] Task: Create Next.js API Route for Telegram [669b62a]
+    - [x] Create `src/app/api/telegram/route.ts` to handle POST requests.
+    - [x] Implement logic to forward messages to the Telegram bot API.
+    - [x] Ensure token is read securely from environment variables.
+    - [x] Return appropriate success/error responses to the frontend.
+- [x] Task: Implement Mechanism for Receiving Messages [669b62a]
+    - [x] Implement logic in the API route to fetch incoming messages (e.g., via Telegram's `getUpdates` method) and expose it via a `GET` request.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: API Route Implementation' (Protocol in workflow.md)
 
 ## Phase 3: Frontend UI and Integration
