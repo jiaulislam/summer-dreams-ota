@@ -5,6 +5,7 @@ import { X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { getChatSession, type ChatSession } from "@/lib/session";
 
 interface Message {
   id: string | number;
@@ -18,6 +19,7 @@ interface ChatWindowProps {
 }
 
 export function ChatWindow({ onClose }: ChatWindowProps) {
+  const [session, setSession] = useState<ChatSession | null>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "initial",
@@ -26,6 +28,10 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
       timestamp: Date.now(),
     },
   ]);
+
+  useEffect(() => {
+    setSession(getChatSession());
+  }, []);
   const [inputValue, setInputValue] = useState("");
   const [isSending, setIsSending] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
