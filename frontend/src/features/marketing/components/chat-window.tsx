@@ -5,7 +5,8 @@ import { X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { getChatSession, type ChatSession } from "@/lib/session";
+import { getChatSession, setChatSession, generateSessionId, type ChatSession } from "@/lib/session";
+import { ChatIntroForm } from "./chat-intro-form";
 
 interface Message {
   id: string | number;
@@ -32,6 +33,27 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
   useEffect(() => {
     setSession(getChatSession());
   }, []);
+
+  const handleFormSubmit = (data: { name: string; contact: string }) => {
+    const newSession: ChatSession = {
+      sessionId: generateSessionId(),
+      name: data.name,
+      contact: data.contact,
+      createdAt: Date.now(),
+    };
+    setChatSession(newSession);
+    setSession(newSession);
+
+    // Update initial message to be more personal
+    setMessages([
+      {
+        id: "initial",
+        text: `Hello ${data.name.split(" ")[0]}! How can we help you today?`,
+        sender: "bot",
+        timestamp: Date.now(),
+      },
+    ]);
+  };
   const [inputValue, setInputValue] = useState("");
   const [isSending, setIsSending] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -131,64 +153,71 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
         </button>
       </div>
 
-      {/* Messages Area */}
-      <div
-        ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scroll-smooth custom-scrollbar"
-      >        {messages.map((msg) => (
+      {!session ? (
+        <ChatIntroForm onSubmit={handleFormSubmit} />
+      ) : (
+        <>
+          {/* Messages Area */}
           <div
-            key={msg.id}
-            className={cn(
-              "flex w-full",
-              msg.sender === "user" ? "justify-end" : "justify-start"
-            )}
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scroll-smooth custom-scrollbar"
           >
-            <div
-              className={cn(
-                "p-3 rounded-2xl max-w-[85%] text-sm shadow-sm transition-all duration-300",
-                msg.sender === "user"
-                  ? "bg-brand-primary text-white rounded-tr-none"
-                  : "bg-white border border-gray-100 text-gray-800 rounded-tl-none"
-              )}
-            >
-              <p className="leading-relaxed">{msg.text}</p>
-              <p className={cn(
-                "text-[9px] mt-1.5 opacity-60 font-medium",
-                msg.sender === "user" ? "text-right" : "text-left"
-              )}>
-                {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </p>
-            </div>
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={cn(
+                  "flex w-full",
+                  msg.sender === "user" ? "justify-end" : "justify-start"
+                )}
+              >
+                <div
+                  className={cn(
+                    "p-3 rounded-2xl max-w-[85%] text-sm shadow-sm transition-all duration-300",
+                    msg.sender === "user"
+                      ? "bg-brand-primary text-white rounded-tr-none"
+                      : "bg-white border border-gray-100 text-gray-800 rounded-tl-none"
+                  )}
+                >
+                  <p className="leading-relaxed">{msg.text}</p>
+                  <p className={cn(
+                    "text-[9px] mt-1.5 opacity-60 font-medium",
+                    msg.sender === "user" ? "text-right" : "text-left"
+                  )}>
+                    {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {/* Input Area */}
-      <div className="p-4 border-t border-gray-100 bg-white">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSendMessage();
-          }}
-          className="flex items-center space-x-2"
-        >
-          <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Type your message..."
-            disabled={isSending}
-            className="flex-1 h-11 rounded-full border-gray-200 focus-visible:ring-brand-primary bg-gray-50/30"
-          />
-          <Button
-            type="submit"
-            size="icon"
-            disabled={isSending || !inputValue.trim()}
-            className="rounded-full h-11 w-11 bg-brand-primary hover:bg-brand-primary/90 transition-all active:scale-90 flex-shrink-0"
-          >
-            {isSending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
-          </Button>
-        </form>
-      </div>
+          {/* Input Area */}
+          <div className="p-4 border-t border-gray-100 bg-white">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSendMessage();
+              }}
+              className="flex items-center space-x-2"
+            >
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Type your message..."
+                disabled={isSending}
+                className="flex-1 h-11 rounded-full border-gray-200 focus-visible:ring-brand-primary bg-gray-50/30"
+              />
+              <Button
+                type="submit"
+                size="icon"
+                disabled={isSending || !inputValue.trim()}
+                className="rounded-full h-11 w-11 bg-brand-primary hover:bg-brand-primary/90 transition-all active:scale-90 flex-shrink-0"
+              >
+                {isSending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+              </Button>
+            </form>
+          </div>
+        </>
+      )}
     </div>
   );
 }
