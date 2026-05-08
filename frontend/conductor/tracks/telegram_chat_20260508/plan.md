@@ -31,10 +31,10 @@
     - [x] Implement a lightweight polling mechanism to fetch incoming messages periodically while the chat window is open.
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Frontend UI and Integration' (Protocol in workflow.md) [de602ad]
 
-## Phase 4: Final Integration and Polish
+## Phase 4: Final Integration and Polish [checkpoint: 8d8832b]
 - [x] Task: Integrate Widget into Marketing Page [9f9e9ea]
     - [x] Render the `FloatingChatWidget` in the appropriate marketing layout or page.
 - [x] Task: UI Polish and Animations [3e16903]
     - [x] Add smooth enter/exit animations for the chat window.
     - [x] Ensure responsive design on mobile devices.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Final Integration and Polish' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Final Integration and Polish' (Protocol in workflow.md) [8d8832b]
