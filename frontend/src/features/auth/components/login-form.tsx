@@ -1,16 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
-import { toast } from "sonner";
-import { useRouter } from "@/i18n/routing";
-import { Eye, EyeOff } from "lucide-react";
+import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+import { Eye, EyeOff } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { toast } from "sonner";
 
 interface LoginFormProps {
   className?: string;
@@ -23,7 +22,7 @@ export function LoginForm({ className, isModal = false }: LoginFormProps) {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
@@ -62,7 +61,7 @@ export function LoginForm({ className, isModal = false }: LoginFormProps) {
             name="email"
             type="email"
             required
-            placeholder="admin@example.com"
+            placeholder="johndoe@example.com"
             autoComplete="off"
           />
         </div>

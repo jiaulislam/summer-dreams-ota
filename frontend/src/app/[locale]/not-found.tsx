@@ -38,7 +38,7 @@ export default function NotFound() {
                 Lost in Paradise?
               </h1>
               <p className="text-lg text-gray-500 leading-relaxed max-w-xs mx-auto text-balance">
-                The page you are looking for has either drifted away or never existed. Let's get you back on track.
+                The page you are looking for has either drifted away or never existed. Let&apos;s get you back on track.
               </p>
             </div>
 
