@@ -27,9 +27,9 @@
     - [x] Filter the incoming Telegram `getUpdates` array to only return messages that contain the user's specific `sessionId` in the text.
 - [x] Task: Conductor - User Manual Verification 'Phase 3: API Enhancements (Tagging & Filtering)' (Protocol in workflow.md) [6d10ac4]
 
-## Phase 4: Frontend Integration & Final Polish
+## Phase 4: Frontend Integration & Final Polish [checkpoint: 71a607b]
 - [x] Task: Connect Frontend State to Updated API [62a6a5f]
     - [x] Update the `fetchUpdates` and `handleSendMessage` functions in `ChatWindow` to pass the correct `sessionId`.
 - [x] Task: UI Polish [41ed921]
     - [x] Ensure smooth transitions between the Intro Form and the Chat view.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Frontend Integration & Final Polish' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Frontend Integration & Final Polish' (Protocol in workflow.md) [71a607b]
