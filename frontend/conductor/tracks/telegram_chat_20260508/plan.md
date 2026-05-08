@@ -4,9 +4,9 @@
 - [x] Task: Environment Configuration [e1916de]
     - [x] Add `TELEGRAM_BOT_TOKEN` to `.env.local` and `.env.example`.
     - [x] Add `TELEGRAM_CHAT_ID` to `.env.local` and `.env.example`.
-- [ ] Task: Create UI Components Structure
-    - [ ] Create `FloatingChatWidget` component in `src/features/marketing/components/`.
-    - [ ] Create `ChatWindow` component in `src/features/marketing/components/`.
+- [x] Task: Create UI Components Structure [5dd5b46]
+    - [x] Create `FloatingChatWidget` component in `src/features/marketing/components/`.
+    - [x] Create `ChatWindow` component in `src/features/marketing/components/`.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Setup and Configuration' (Protocol in workflow.md)
 
 ## Phase 2: API Route Implementation
