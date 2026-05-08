@@ -13,13 +13,32 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { message } = await request.json();
+    const { message, sessionId, name, contact, type } = await request.json();
 
-    if (!message) {
+    if (!sessionId) {
       return NextResponse.json(
-        { error: "Message is required" },
+        { error: "Session ID is required" },
         { status: 400 }
       );
+    }
+
+    let text = "";
+
+    if (type === "lead") {
+      text = `🆕 *NEW LEAD CAPTURED*\n\n` +
+             `🆔 *Session ID:* \`${sessionId}\`\n` +
+             `👤 *Name:* ${name}\n` +
+             `📞 *Contact:* ${contact}\n\n` +
+             `_User is now waiting to chat._`;
+    } else {
+      if (!message) {
+        return NextResponse.json(
+          { error: "Message is required" },
+          { status: 400 }
+        );
+      }
+      // Simple prefixing for session tracking and privacy
+      text = `[ID: ${sessionId}] ${name || "User"}: ${message}`;
     }
 
     const response = await fetch(
@@ -31,7 +50,8 @@ export async function POST(request: Request) {
         },
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
-          text: message,
+          text: text,
+          parse_mode: type === "lead" ? "Markdown" : undefined,
         }),
       }
     );
@@ -56,7 +76,10 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const sessionId = searchParams.get("sessionId");
+
   if (!TELEGRAM_BOT_TOKEN) {
     return NextResponse.json(
       { error: "Server configuration error" },
@@ -65,10 +88,8 @@ export async function GET() {
   }
 
   try {
-    // In a real application, you might want to use webhooks for real-time messages.
-    // For this implementation, we'll use long polling or simple polling via getUpdates.
     const response = await fetch(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?limit=10&allowed_updates=["message"]`,
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?limit=100&allowed_updates=["message"]`,
       {
         method: "GET",
       }
@@ -83,7 +104,23 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json({ success: true, messages: data.result });
+    let filteredMessages = data.result || [];
+
+    // Privacy Filtering: Only return messages that belong to this session
+    // In "Simple Prefixing", we check if the bot's reply contains the sessionId
+    if (sessionId) {
+      filteredMessages = filteredMessages.filter((update: any) => {
+        const text = update.message?.text || "";
+        // We assume the agent replies with the [ID: sessionId] prefix
+        // or the message is from the user itself (which we already have in local state, but for sync)
+        return text.includes(`[ID: ${sessionId}]`);
+      });
+    } else {
+      // If no sessionId is provided, return nothing for safety (privacy)
+      filteredMessages = [];
+    }
+
+    return NextResponse.json({ success: true, messages: filteredMessages });
   } catch (error) {
     console.error("Error fetching telegram updates:", error);
     return NextResponse.json(
