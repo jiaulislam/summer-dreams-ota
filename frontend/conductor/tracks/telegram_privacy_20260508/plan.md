@@ -8,14 +8,14 @@
     - [x] Modify `FloatingChatWidget` or `ChatWindow` state to track `hasSession` and the user's details.
 - [x] Task: Conductor - User Manual Verification 'Phase 1: State Management and Local Storage' (Protocol in workflow.md) [d868cfe]
 
-## Phase 2: Lead Capture UI Implementation
+## Phase 2: Lead Capture UI Implementation [checkpoint: 38b311f]
 - [x] Task: Build Intro Form Component [c533a0a]
     - [x] Create a new component `ChatIntroForm` inside `src/features/marketing/components/`.
     - [x] Include fields for Name (required) and Contact Number (required), styled with `shadcn/ui` Inputs and Labels.
     - [x] Implement form validation and a submission handler.
 - [x] Task: Integrate Form into Chat Window [4e88aa1]
     - [x] Modify `ChatWindow` to conditionally render `ChatIntroForm` if no session exists, or the actual message interface if a session is present.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Lead Capture UI Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Lead Capture UI Implementation' (Protocol in workflow.md) [38b311f]
 
 ## Phase 3: API Enhancements (Tagging & Filtering)
 - [ ] Task: Update POST API Route (Tagging)
