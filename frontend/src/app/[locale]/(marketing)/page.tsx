@@ -4,6 +4,7 @@ import { PopularDestinations } from "@/features/marketing/components/popular-des
 import { WhyChooseUs } from "@/features/marketing/components/why-choose-us";
 import { Footer } from "@/features/marketing/components/footer";
 import { Navbar } from "@/features/marketing/components/navbar";
+import { FloatingChatWidget } from "@/features/marketing/components/floating-chat-widget";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
         <WhyChooseUs />
       </main>
       <Footer />
+      <FloatingChatWidget />
     </div>
   );
 }
