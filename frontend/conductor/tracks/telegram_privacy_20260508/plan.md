@@ -30,6 +30,6 @@
 ## Phase 4: Frontend Integration & Final Polish
 - [x] Task: Connect Frontend State to Updated API [62a6a5f]
     - [x] Update the `fetchUpdates` and `handleSendMessage` functions in `ChatWindow` to pass the correct `sessionId`.
-- [ ] Task: UI Polish
-    - [ ] Ensure smooth transitions between the Intro Form and the Chat view.
+- [x] Task: UI Polish [41ed921]
+    - [x] Ensure smooth transitions between the Intro Form and the Chat view.
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Frontend Integration & Final Polish' (Protocol in workflow.md)
