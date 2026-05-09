@@ -1,6 +1,6 @@
 from parler.admin import TranslatableAdmin, TranslatableStackedInline
 
-from django.contrib import admin
+from django.contrib import admin, messages
 
 from summer_dreams_ota.marketing.models import (
     AgencySetting,
@@ -48,6 +48,21 @@ class PopularDestinationAdmin(TranslatableAdmin):
     list_editable = ("is_active", "order_index")
     list_filter = ("is_active",)
     list_per_page = LIST_PER_PAGE
+
+    def changelist_view(self, request, extra_context=None):
+        active_count = self.model.objects.filter(is_active=True).count()
+        if active_count > 5:
+            messages.warning(
+                request,
+                f"Currently there are {active_count} active popular destinations. "
+                "It is recommended to have a maximum of 5 to avoid UI breakages on the frontend.",
+            )
+        else:
+            messages.info(
+                request,
+                "Recommendation: Maintain a maximum of 5 active popular destinations for optimal UI display.",
+            )
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 class WhyChooseUsItemInline(TranslatableStackedInline):
