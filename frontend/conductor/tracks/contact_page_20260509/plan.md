@@ -10,10 +10,10 @@
 - [x] Task: Build the `ContactInfo` component (`src/features/marketing/components/contact-info.tsx`) displaying address, phone, email, and a styled WhatsApp redirect button (linking to `wa.me`). d5f1953
 - [x] Task: Assemble the page layout in `contact-us/page.tsx`, displaying both components responsively. d5f1953
 - [x] Task: Refine page design with a themed header and background to improve navbar visibility and visual appeal. dd72181
-- [ ] Task: Update the `Footer` component (`src/features/marketing/components/footer.tsx`) to link the "Contact" link to the new `/contact-us` route. d5f1953
+- [x] Task: Update the `Footer` component (`src/features/marketing/components/footer.tsx`) to link the "Contact" link to the new `/contact-us` route. d5f1953
 - [x] Task: Conductor - User Manual Verification 'UI Implementation' (Protocol in workflow.md) d5f1953
 
-## Phase 3: Integration
+## Phase 3: Integration [checkpoint: caef476]
 - [x] Task: Implement the API client function in `src/features/marketing/api/index.ts` to submit the contact form data. c7539da
 - [x] Task: Integrate the API submission into the `ContactForm` component using TanStack Query mutations, handling loading states and displaying success/error toast notifications. 9f26588
-- [~] Task: Conductor - User Manual Verification 'Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Integration' (Protocol in workflow.md) caef476
