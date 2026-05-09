@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Add a new page Contact Us and link it to footer contact**
+- [x] **Track: Add a new page Contact Us and link it to footer contact**
 *Link: [./tracks/contact_page_20260509/](./tracks/contact_page_20260509/)*
