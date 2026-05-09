@@ -21,12 +21,7 @@ Implementing the translatable models and singleton logic.
 ## Phase 3: Serializers & Flattening Logic
 Implementing DRF serializers with the flattening strategy.
 
-- [ ] Task: Implement `FlattenTranslationMixin` for serializers
-    - [ ] Write tests for `FlattenTranslationMixin`
-    - [ ] Implement mixin in `summer_dreams_ota.shared` (or marketing app if preferred)
-- [ ] Task: Implement Serializers for all models
-    - [ ] Write tests for serializers (verify flattening and absolute URLs)
-    - [ ] Implement `HeroSectionSerializer`, `TourPackageSerializer`, `PopularDestinationSerializer`, `WhyChooseUsSerializer`, `AgencySettingSerializer`
+- [x] Task: Implement Phase 3: Serializers & Flattening Logic [8fd3e96]
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Serializers & Flattening Logic' (Protocol in workflow.md)
 
 ## Phase 4: API Endpoint & Service Logic
