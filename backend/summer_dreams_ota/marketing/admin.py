@@ -12,6 +12,8 @@ from summer_dreams_ota.marketing.models import (
     WhyChooseUsItem,
 )
 
+LIST_PER_PAGE = 15
+
 
 @admin.register(HeroSection)
 class HeroSectionAdmin(TranslatableAdmin):
@@ -34,6 +36,8 @@ class TourPackageAdmin(TranslatableAdmin):
 
     list_display = ("name", "price", "is_active", "order_index")
     list_editable = ("is_active", "order_index")
+    list_filter = ("is_active",)
+    list_per_page = LIST_PER_PAGE
 
 
 @admin.register(PopularDestination)
@@ -42,6 +46,8 @@ class PopularDestinationAdmin(TranslatableAdmin):
 
     list_display = ("name", "is_active", "order_index")
     list_editable = ("is_active", "order_index")
+    list_filter = ("is_active",)
+    list_per_page = LIST_PER_PAGE
 
 
 class WhyChooseUsItemInline(TranslatableStackedInline):
