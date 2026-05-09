@@ -5,16 +5,28 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from django.conf import settings
 
-from summer_dreams_ota.authentication.serializers import LoginSerializer, SignupSerializer
+from summer_dreams_ota.authentication.serializers import LoginSerializer, SignupSerializer, UserSerializer
 from summer_dreams_ota.authentication.services import AuthService
 
 logger = logging.getLogger(__name__)
+
+
+class UserMeView(APIView):
+    """
+    API View to retrieve the currently authenticated user.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class SignupView(APIView):

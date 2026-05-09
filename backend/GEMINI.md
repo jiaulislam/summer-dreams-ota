@@ -108,6 +108,7 @@ To avoid root namespace pollution, all new domain apps must be nested within `su
 ---
 
 ## Development Roadmap (TODOs)
-*   [ ] Implement URL versioning in `core/urls.py`.
-*   [ ] Register `summer_dreams_ota.shared` in `INSTALLED_APPS`.
-*   [ ] Implement JWT authentication bridge.
+*   [x] Implement URL versioning in `core/urls.py`.
+*   [x] Register `summer_dreams_ota.shared` in `INSTALLED_APPS`.
+*   [x] Implement JWT authentication bridge.
+*   [x] Implement Telegram Chat Widget integration.

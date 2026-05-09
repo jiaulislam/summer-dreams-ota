@@ -4,13 +4,19 @@ import { redirect } from "next/navigation";
 
 type FetchOptions = RequestInit & {
   params?: Record<string, string>;
+  requireAuth?: boolean;
 };
 
 export async function apiClient(endpoint: string, options: FetchOptions = {}) {
-  const { params, ...customConfig } = options;
+  const { params, requireAuth = true, ...customConfig } = options;
 
-  const session = await auth();
-  const accessToken = session?.accessToken;
+  let accessToken = null;
+  let session = null;
+
+  if (requireAuth) {
+    session = await auth();
+    accessToken = session?.accessToken;
+  }
 
   const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
   const url = new URL(`${API_URL}${cleanEndpoint}`);
@@ -35,8 +41,9 @@ export async function apiClient(endpoint: string, options: FetchOptions = {}) {
 
   let response = await fetch(url.toString(), config);
 
-  if (response.status === 401) {
+  if (response.status === 401 && requireAuth) {
     const refreshToken = session?.refreshToken;
+    // ... refresh logic ...
 
     let refreshSuccessful = false;
     let newAccessToken = null;

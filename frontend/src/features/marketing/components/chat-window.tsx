@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { getChatSession, setChatSession, generateSessionId, type ChatSession } from "@/lib/session";
 import { ChatIntroForm } from "./chat-intro-form";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { sendChatMessage, pollChatMessages } from "../api/telegram";
 
 interface Message {
   id: string | number;
@@ -21,18 +23,42 @@ interface ChatWindowProps {
 
 export function ChatWindow({ onClose }: ChatWindowProps) {
   const [session, setSession] = useState<ChatSession | null>(null);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "initial",
-      text: "Hello! How can we help you today?",
-      sender: "bot",
-      timestamp: Date.now(),
-    },
-  ]);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setSession(getChatSession());
   }, []);
+
+  // Poll for messages using TanStack Query
+  const { data: serverMessages } = useQuery({
+    queryKey: ["chat-messages", session?.sessionId],
+    queryFn: async () => {
+      if (!session) return [];
+      const response = await pollChatMessages(session.sessionId);
+      
+      // Handle the Django backend response structure
+      // We expect an array of messages or { success: true, messages: [...] }
+      const messageList = Array.isArray(response) ? response : (response.messages || []);
+      
+      return messageList.map((m: any) => ({
+        id: m.id || Math.random(),
+        text: m.message_text || m.text || "",
+        sender: m.sender === 'agent' ? 'bot' : 'user',
+        timestamp: new Date(m.created_at || m.timestamp || Date.now()).getTime()
+      })) as Message[];
+    },
+    enabled: !!session,
+    refetchInterval: 3000, // Poll every 3 seconds
+  });
+
+  // Send message mutation
+  const sendMutation = useMutation({
+    mutationFn: (payload: any) => sendChatMessage(payload),
+    onSuccess: () => {
+      // Invalidate the query to fetch the latest messages immediately
+      queryClient.invalidateQueries({ queryKey: ["chat-messages", session?.sessionId] });
+    }
+  });
 
   const handleFormSubmit = async (data: { name: string; contact: string }) => {
     const newSession: ChatSession = {
@@ -44,122 +70,48 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
     setChatSession(newSession);
     setSession(newSession);
 
-    // Update initial message to be more personal
-    setMessages([
-      {
-        id: "initial",
-        text: `Hello ${data.name.split(" ")[0]}! How can we help you today?`,
-        sender: "bot",
-        timestamp: Date.now(),
-      },
-    ]);
-
-    // Send initial lead info to Telegram
-    try {
-      await fetch("/api/telegram", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "lead",
-          sessionId: newSession.sessionId,
-          name: newSession.name,
-          contact: newSession.contact,
-        }),
-      });
-    } catch (error) {
-      console.error("Error sending lead notification:", error);
-    }
+    // Send initial lead info to Django
+    sendMutation.mutate({
+      type: "lead",
+      sessionId: newSession.sessionId,
+      name: newSession.name,
+      contact: newSession.contact,
+    });
   };
 
   const [inputValue, setInputValue] = useState("");
-  const [isSending, setIsSending] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const lastUpdateIdRef = useRef<number>(0);
+
+  // Combine local initial message with server messages
+  const messages: Message[] = serverMessages?.length ? serverMessages : [
+    {
+      id: "initial",
+      text: session ? `Hello ${session.name.split(" ")[0]}! How can we help you today?` : "Hello! How can we help you today?",
+      sender: "bot",
+      timestamp: session ? session.createdAt : Date.now(),
+    }
+  ];
 
   // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, sendMutation.isPending]);
 
-  const handleSendMessage = async () => {
-    if (!inputValue.trim() || isSending || !session) return;
+  const handleSendMessage = () => {
+    if (!inputValue.trim() || sendMutation.isPending || !session) return;
 
-    const userMessage: Message = {
-      id: Date.now(),
-      text: inputValue.trim(),
-      sender: "user",
-      timestamp: Date.now(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
+    const text = inputValue.trim();
     setInputValue("");
-    setIsSending(true);
 
-    try {
-      const response = await fetch("/api/telegram", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: userMessage.text,
-          sessionId: session.sessionId,
-          name: session.name,
-        }),
-      });
-
-      if (!response.ok) throw new Error("Failed to send");
-    } catch (error) {
-      console.error("Error sending message:", error);
-      // Optional: Add an error message to the UI
-    } finally {
-      setIsSending(false);
-    }
+    sendMutation.mutate({
+      type: "message",
+      message: text,
+      sessionId: session.sessionId,
+      name: session.name,
+    });
   };
-
-  const fetchUpdates = useCallback(async () => {
-    if (!session) return;
-
-    try {
-      const response = await fetch(`/api/telegram?sessionId=${session.sessionId}`);
-      const data = await response.json();
-
-      if (data.success && data.messages) {
-        const newBotMessages: Message[] = data.messages
-          .filter((update: any) => update.update_id > lastUpdateIdRef.current)
-          .map((update: any) => {
-            lastUpdateIdRef.current = Math.max(lastUpdateIdRef.current, update.update_id);
-
-            // Strip the prefix from the display text if present
-            let text = update.message.text || "";
-            const prefix = `[ID: ${session.sessionId}]`;
-            if (text.includes(prefix)) {
-              text = text.split(prefix).pop()?.trim() || text;
-            }
-
-            return {
-              id: update.update_id,
-              text,
-              sender: "bot",
-              timestamp: update.message.date * 1000,
-            };
-          });
-
-        if (newBotMessages.length > 0) {
-          setMessages((prev) => [...prev, ...newBotMessages]);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching updates:", error);
-    }
-  }, [session]);
-
-
-  // Poll for updates every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(fetchUpdates, 5000);
-    return () => clearInterval(interval);
-  }, [fetchUpdates]);
 
   return (
     <div className="flex flex-col h-full bg-white">
@@ -220,6 +172,16 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
                 </div>
               </div>
             ))}
+            
+            {/* Optimistic UI or Pending State for sent messages */}
+            {sendMutation.isPending && sendMutation.variables?.type === "message" && (
+              <div className="flex w-full justify-end opacity-50">
+                <div className="p-3 rounded-2xl max-w-[85%] text-sm shadow-sm transition-all duration-300 bg-brand-primary text-white rounded-tr-none">
+                  <p className="leading-relaxed">{sendMutation.variables.message}</p>
+                  <p className="text-[9px] mt-1.5 text-right font-medium">Sending...</p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Input Area */}
@@ -235,16 +197,16 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Type your message..."
-                disabled={isSending}
+                disabled={sendMutation.isPending}
                 className="flex-1 h-11 rounded-full border-gray-200 focus-visible:ring-brand-primary bg-gray-50/30"
               />
               <Button
                 type="submit"
                 size="icon"
-                disabled={isSending || !inputValue.trim()}
+                disabled={sendMutation.isPending || !inputValue.trim()}
                 className="rounded-full h-11 w-11 bg-brand-primary hover:bg-brand-primary/90 transition-all active:scale-90 flex-shrink-0"
               >
-                {isSending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+                {sendMutation.isPending ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
               </Button>
             </form>
           </div>

@@ -33,7 +33,7 @@ SECRET_KEY = "django-insecure-u_(_y%9x@_u5ev*0&moui%qpq===7g)t78s*9_(67bweeny@ef
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -41,7 +41,12 @@ SUMMER_DREAMS_OTA_APPS = [
     "summer_dreams_ota.shared",
     "summer_dreams_ota.users",
     "summer_dreams_ota.authentication",
+    "summer_dreams_ota.telegram",
 ]
+
+# Telegram Configuration
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 INSTALLED_APPS = [
     "django.contrib.admin",

@@ -1,5 +1,18 @@
 from rest_framework import serializers
 
+from summer_dreams_ota.users.models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the User model.
+    """
+
+    class Meta:
+        model = User
+        fields = ["id", "email", "first_name", "last_name", "is_staff"]
+        read_only_fields = ["email", "is_staff"]
+
 
 class LoginSerializer(serializers.Serializer):
     """

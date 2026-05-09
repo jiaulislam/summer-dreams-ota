@@ -1,8 +1,10 @@
+"use server";
+
 import { Flight } from "@/types";
 
 export const getFlights = async (): Promise<Flight[]> => {
-  // In a real app, this calls the Django backend
-  // return apiClient("/flights/");
+  // Since flights are public, we use requireAuth: false
+  // return apiClient("/flights/", { requireAuth: false });
 
   // Mocking for now to show functionality
   return [
