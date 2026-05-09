@@ -11,6 +11,7 @@ app_name = "v1"
 urlpatterns = [
     path("auth/", include("summer_dreams_ota.authentication.urls")),
     path("auth/", include("dj_rest_auth.urls")),
+    path("marketing/", include("summer_dreams_ota.marketing.urls")),
     path("telegram/", include("summer_dreams_ota.telegram.urls")),
     # Schema and Docs
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
