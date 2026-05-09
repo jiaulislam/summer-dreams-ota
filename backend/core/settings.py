@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "allauth.headless",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "parler",
     "drf_spectacular",
 ]
 
@@ -230,3 +231,15 @@ ADMIN_USER_LANGUAGE_SWITCHER = True
 STATIC_URL = "static/"
 
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
+
+# Parler (Translations)
+PARLER_LANGUAGES = {
+    None: (
+        {"code": "en"},
+        {"code": "es"},
+    ),
+    "default": {
+        "fallback": "en",
+        "hide_untranslated": False,
+    },
+}
