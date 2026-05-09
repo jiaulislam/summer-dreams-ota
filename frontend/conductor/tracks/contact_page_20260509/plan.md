@@ -13,6 +13,6 @@
 - [x] Task: Conductor - User Manual Verification 'UI Implementation' (Protocol in workflow.md) d5f1953
 
 ## Phase 3: Integration
-- [~] Task: Implement the API client function in `src/features/marketing/api/index.ts` to submit the contact form data.
-- [ ] Task: Integrate the API submission into the `ContactForm` component using TanStack Query mutations, handling loading states and displaying success/error toast notifications.
-- [ ] Task: Conductor - User Manual Verification 'Integration' (Protocol in workflow.md)
+- [x] Task: Implement the API client function in `src/features/marketing/api/index.ts` to submit the contact form data. c7539da
+- [x] Task: Integrate the API submission into the `ContactForm` component using TanStack Query mutations, handling loading states and displaying success/error toast notifications. 9f26588
+- [~] Task: Conductor - User Manual Verification 'Integration' (Protocol in workflow.md)
