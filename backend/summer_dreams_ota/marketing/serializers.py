@@ -4,6 +4,7 @@ from rest_framework import serializers
 
 from summer_dreams_ota.marketing.models import (
     AgencySetting,
+    ContactInquiry,
     HeroSection,
     PopularDestination,
     TourPackage,
@@ -91,3 +92,9 @@ class AgencySettingSerializer(serializers.ModelSerializer):
             "instagram_url",
             "linkedin_url",
         )
+
+
+class ContactInquirySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactInquiry
+        fields = ("name", "email", "phone", "message")
