@@ -70,5 +70,24 @@
     "hotelBooking": "Hotel Booking",
     "emi": "EMI Info",
     "backToTop": "Back to Top"
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "subtitle": "Have a question or planning your next adventure? Our travel experts are here to help you every step of the way.",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "john@example.com",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "+1 234 567 890",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Tell us about your travel plans or any questions you have...",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully! We will get back to you soon.",
+    "error": "Failed to send message. Please try again or contact us via WhatsApp.",
+    "infoTitle": "Contact Information",
+    "addressLabel": "Office Address",
+    "whatsappButton": "Message us on WhatsApp"
   }
 }
