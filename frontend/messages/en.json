@@ -82,7 +82,7 @@
     "phonePlaceholder": "+1 234 567 890",
     "messageLabel": "Your Message",
     "messagePlaceholder": "Tell us about your travel plans or any questions you have...",
-    "submit": "Send Message",
+    "submit": "Send Email",
     "sending": "Sending...",
     "success": "Message sent successfully! We will get back to you soon.",
     "error": "Failed to send message. Please try again or contact us via WhatsApp.",
