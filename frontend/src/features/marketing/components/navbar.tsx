@@ -1,9 +1,11 @@
 "use client";
 
 import { Link } from "@/i18n/routing";
-import { LoginModal } from "@/features/auth/components/login-modal";
+// import { LoginModal } from "@/features/auth/components/login-modal";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import logoImg from "../../../../public/summer_dreams.jpg";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,15 +30,26 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
+          <div className={cn(
+            "relative transition-all duration-300 overflow-hidden rounded-full",
+            isScrolled ? "h-10 w-10" : "h-12 w-12"
+          )}>
+            <Image
+              src={logoImg}
+              alt="Summer Dreams Logo"
+              placeholder="blur"
+              className="object-cover"
+            />
+          </div>
           <span className={cn(
-            "text-2xl font-black tracking-tighter transition-colors duration-300",
+            "text-xl font-black tracking-tighter transition-colors duration-300",
             isScrolled ? "text-gray-900" : "text-white"
           )}>
-            SUMMER<span className="text-brand-primary">DREAMS</span>
+            SUMMER <span className="text-brand-primary">DREAMS</span> <span>TRAVEL</span>
           </span>
         </Link>
 
-        <LoginModal isScrolled={isScrolled} />
+        {/* <LoginModal isScrolled={isScrolled} /> */}
       </div>
     </nav>
   );
