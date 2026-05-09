@@ -9,12 +9,25 @@ import {
   Play,
   Phone,
   Map,
-  ArrowUp
+  ArrowUp,
+  Mail,
 } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
-export function Footer() {
+interface FooterProps {
+  agency?: {
+    address: string;
+    phone: string;
+    email: string;
+    facebook_url: string;
+    instagram_url: string;
+    linkedin_url: string;
+  };
+}
+
+export function Footer({ agency }: FooterProps) {
   const t = useTranslations("Footer");
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -31,6 +44,10 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const address = agency?.address || "123 Travel Tower, Dhaka, Bangladesh";
+  const phone = agency?.phone || "+880 1234 567890";
+  const email = agency?.email || "contact@summerdreams.com";
+
   return (
     <footer className="bg-brand-secondary text-white py-16 relative">
       <div className="container mx-auto px-4">
@@ -45,15 +62,34 @@ export function Footer() {
             <div className="space-y-4 text-gray-400">
               <div className="flex items-start space-x-3">
                 <Map size={20} className="text-brand-accent shrink-0 mt-1" />
-                <p>123 Travel Tower, Dhaka, Bangladesh</p>
+                <p>{address}</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={20} className="text-brand-accent shrink-0" />
-                <p>+880 1234 567890</p>
+                <p>{phone}</p>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail size={20} className="text-brand-accent shrink-0" />
+                <p>{email}</p>
               </div>
             </div>
             <div className="flex space-x-4">
-              {[Globe, Send, Camera, Play].map((Icon, i) => (
+              {agency?.facebook_url && (
+                <Link href={agency.facebook_url} target="_blank" className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-accent transition-colors duration-300">
+                  <FaFacebookF size={18} />
+                </Link>
+              )}
+              {agency?.instagram_url && (
+                <Link href={agency.instagram_url} target="_blank" className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-accent transition-colors duration-300">
+                  <FaInstagram size={20} />
+                </Link>
+              )}
+              {agency?.linkedin_url && (
+                <Link href={agency.linkedin_url} target="_blank" className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-accent transition-colors duration-300">
+                  <FaLinkedinIn size={18} />
+                </Link>
+              )}
+              {!agency && [Globe, Send, Camera, Play].map((Icon, i) => (
                 <Link
                   key={i}
                   href="#"

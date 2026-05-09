@@ -4,35 +4,42 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-const DESTINATIONS = [
+const DEFAULT_DESTINATIONS = [
   {
-    id: 1,
     name: "Paris",
-    desc: "The City of Light, known for its art, fashion, and history.",
+    description: "The City of Light, known for its art, fashion, and history.",
     image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=800",
   },
   {
-    id: 2,
     name: "New York",
-    desc: "The Big Apple, a global center of finance and culture.",
+    description: "The Big Apple, a global center of finance and culture.",
     image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&q=80&w=800",
   },
   {
-    id: 3,
     name: "Tokyo",
-    desc: "A bustling metropolis blending tradition and innovation.",
+    description: "A bustling metropolis blending tradition and innovation.",
     image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80&w=800",
   },
   {
-    id: 4,
     name: "Cape Town",
-    desc: "Stunning coastline and iconic Table Mountain views.",
+    description: "Stunning coastline and iconic Table Mountain views.",
     image: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
-export function PopularDestinations() {
+interface PopularDestinationsProps {
+  destinations?: Array<{
+    name: string;
+    description: string;
+    image: string;
+    is_active?: boolean;
+  }>;
+}
+
+export function PopularDestinations({ destinations }: PopularDestinationsProps) {
   const t = useTranslations("Destinations");
+
+  const items = destinations?.length ? destinations.filter(d => d.is_active !== false) : DEFAULT_DESTINATIONS;
 
   return (
     <section className="py-20 bg-gray-50">
@@ -42,9 +49,9 @@ export function PopularDestinations() {
         </h2>
 
         <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-4 h-auto md:h-[600px]">
-          {DESTINATIONS.map((dest) => (
+          {items.map((dest, idx) => (
             <div
-              key={dest.id}
+              key={idx}
               className="group relative flex-1 md:hover:flex-[1.5] transition-all duration-700 ease-in-out cursor-pointer rounded-[40px] overflow-hidden shadow-xl min-h-[400px] md:min-h-full"
             >
               <Image
@@ -63,7 +70,7 @@ export function PopularDestinations() {
                 <div className="bg-white p-6 rounded-3xl shadow-2xl space-y-3 relative overflow-hidden">
                   <div className="space-y-1">
                     <h3 className="text-2xl font-black text-gray-900">{dest.name}</h3>
-                    <p className="text-sm text-gray-500 line-clamp-2">{dest.desc}</p>
+                    <p className="text-sm text-gray-500 line-clamp-2">{dest.description}</p>
                   </div>
 
                   <div className="flex justify-end">

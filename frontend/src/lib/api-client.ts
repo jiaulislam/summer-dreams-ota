@@ -1,6 +1,7 @@
 import { auth, signOut } from "@/auth";
 import { API_URL } from "./constants";
 import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 
 type FetchOptions = RequestInit & {
   params?: Record<string, string>;
@@ -12,6 +13,7 @@ export async function apiClient(endpoint: string, options: FetchOptions = {}) {
 
   let accessToken = null;
   let session = null;
+  const locale = await getLocale();
 
   if (requireAuth) {
     session = await auth();
@@ -27,6 +29,7 @@ export async function apiClient(endpoint: string, options: FetchOptions = {}) {
 
   const headers: HeadersInit = {
     "Content-Type": "application/json",
+    "Accept-Language": locale,
     ...customConfig.headers,
   };
 

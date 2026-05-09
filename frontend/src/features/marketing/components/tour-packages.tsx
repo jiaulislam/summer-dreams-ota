@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
-const PACKAGES = [
+const DEFAULT_PACKAGES = [
   {
     id: 1,
     name: "Santorini, Greece",
@@ -26,25 +26,24 @@ const PACKAGES = [
     price: 1500,
     image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800",
   },
-  {
-    id: 4,
-    name: "Swiss Alps, Switzerland",
-    price: 1800,
-    image: "https://images.unsplash.com/photo-1531219432768-9f540ce91ef3?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    id: 5,
-    name: "Machu Picchu, Peru",
-    price: 1100,
-    image: "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&q=80&w=800",
-  },
 ];
 
-export function TourPackages() {
+interface TourPackagesProps {
+  tours?: Array<{
+    name: string;
+    price: string | number;
+    image: string;
+    is_active?: boolean;
+  }>;
+}
+
+export function TourPackages({ tours }: TourPackagesProps) {
   const t = useTranslations("TourPackages");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+
+  const packages = tours?.length ? tours.filter(t => t.is_active !== false) : DEFAULT_PACKAGES;
 
   const scrollToIndex = useCallback((index: number) => {
     if (!scrollRef.current) return;
@@ -61,14 +60,14 @@ export function TourPackages() {
   }, []);
 
   const handleNext = useCallback(() => {
-    const nextIndex = (activeIndex + 1) % PACKAGES.length;
+    const nextIndex = (activeIndex + 1) % packages.length;
     scrollToIndex(nextIndex);
-  }, [activeIndex, scrollToIndex]);
+  }, [activeIndex, scrollToIndex, packages.length]);
 
   const handlePrev = useCallback(() => {
-    const prevIndex = (activeIndex - 1 + PACKAGES.length) % PACKAGES.length;
+    const prevIndex = (activeIndex - 1 + packages.length) % packages.length;
     scrollToIndex(prevIndex);
-  }, [activeIndex, scrollToIndex]);
+  }, [activeIndex, scrollToIndex, packages.length]);
 
   // Auto-scroll logic
   useEffect(() => {
@@ -89,7 +88,7 @@ export function TourPackages() {
     const itemWidth = item?.offsetWidth || 320;
     const gap = 24;
     const index = Math.round(container.scrollLeft / (itemWidth + gap));
-    if (index !== activeIndex && index >= 0 && index < PACKAGES.length) {
+    if (index !== activeIndex && index >= 0 && index < packages.length) {
       setActiveIndex(index);
     }
   };
@@ -139,9 +138,9 @@ export function TourPackages() {
             onScroll={handleScroll}
             className="flex space-x-6 overflow-x-auto pb-12 snap-x snap-mandatory bg-transparent [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           >
-            {PACKAGES.map((pkg) => (
+            {packages.map((pkg, idx) => (
               <div
-                key={pkg.id}
+                key={idx}
                 className="package-card flex-none w-[85vw] md:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] h-[450px] relative rounded-[40px] overflow-hidden snap-center shadow-xl shadow-brand-primary/5 hover:shadow-brand-primary/20 transition-all duration-500 cursor-pointer group/card"
               >
                 <Image
@@ -172,7 +171,7 @@ export function TourPackages() {
 
           {/* Position Indicators (Dots) */}
           <div className="flex justify-center space-x-3 mt-4">
-            {PACKAGES.map((_, idx) => (
+            {packages.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => scrollToIndex(idx)}
