@@ -10,15 +10,51 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import logging
 import os
 from datetime import timedelta
 from pathlib import Path
 
+import sentry_sdk
 from dotenv import load_dotenv
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
+
+# Sentry Configuration
+SENTRY_DSN = os.getenv("SENTRY_DSN")
+if SENTRY_DSN:
+
+    def traces_sampler(sampling_context: dict) -> float:
+        """
+        Dynamically determine the sampling rate for transactions.
+        Ignore health checks and other noisy endpoints.
+        """
+        path = sampling_context.get("wsgi_environ", {}).get("PATH_INFO", "")
+        if path in ["/healthz", "/api/v1/schema/", "/api/v1/docs/"]:
+            return 0
+        return float(os.getenv("SENTRY_TRACES_SAMPLE_RATE", "1.0"))
+
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[
+            DjangoIntegration(),
+            LoggingIntegration(
+                level=logging.INFO,  # Capture info and above as breadcrumbs
+                event_level=logging.ERROR,  # Send errors and above as events
+            ),
+        ],
+        # Performance Monitoring
+        traces_sampler=traces_sampler,
+        # Profiling
+        profiles_sample_rate=float(os.getenv("SENTRY_PROFILES_SAMPLE_RATE", "1.0")),
+        environment=os.getenv("SENTRY_ENVIRONMENT", "development"),
+        release=os.getenv("SENTRY_RELEASE"),
+        send_default_pii=True,
+    )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
