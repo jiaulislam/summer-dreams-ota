@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 SUMMER_DREAMS_OTA_APPS = [
     "summer_dreams_ota.shared",
+    "summer_dreams_ota.marketing",
     "summer_dreams_ota.users",
     "summer_dreams_ota.authentication",
     "summer_dreams_ota.telegram",
