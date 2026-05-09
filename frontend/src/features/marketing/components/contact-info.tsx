@@ -20,7 +20,7 @@ export function ContactInfo({ agency }: ContactInfoProps) {
   const address = agency?.address || "123 Travel Tower, Dhaka, Bangladesh";
   const phone = agency?.phone || "+880 1234 567890";
   const email = agency?.email || "contact@summerdreams.com";
-  const whatsapp = agency?.whatsapp || "8801234567890";
+  const whatsapp = agency?.whatsapp || "51983204696";
 
   const handleWhatsappRedirect = () => {
     window.open(`https://wa.me/${whatsapp.replace(/[^0-9]/g, "")}`, "_blank");
