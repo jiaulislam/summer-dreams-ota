@@ -281,6 +281,20 @@ wheels = [
 ]
 
 [[package]]
+name = "django-parler-rest"
+version = "2.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "django-parler" },
+    { name = "djangorestframework" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0b/76/9e6f7b0f370805fbb4dedfac7ff870afcef892c2d32ab1ef3192f85172f7/django-parler-rest-2.2.tar.gz", hash = "sha256:58d0d7155964214dfbdb72783eff6a200c5e786e2d4f3cd74ea463d56cb10e9c", size = 11117, upload-time = "2022-05-04T14:05:31.972Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/92/64/e4656794c743d0009425183b9cedfa79206c648902e6a41a758116784b8f/django_parler_rest-2.2-py2.py3-none-any.whl", hash = "sha256:3cba9a47ec64771394e99ca49f9bef6f7dd76c1e39634fd634d2c1050fb9630a", size = 11636, upload-time = "2022-05-04T14:05:30.51Z" },
+]
+
+[[package]]
 name = "djangorestframework"
 version = "3.17.1"
 source = { registry = "https://pypi.org/simple" }
@@ -690,6 +704,7 @@ dependencies = [
     { name = "django-cors-headers" },
     { name = "django-filter" },
     { name = "django-parler" },
+    { name = "django-parler-rest" },
     { name = "djangorestframework" },
     { name = "djangorestframework-simplejwt" },
     { name = "drf-spectacular" },
@@ -718,6 +733,7 @@ requires-dist = [
     { name = "django-cors-headers", specifier = ">=4.9.0" },
     { name = "django-filter", specifier = ">=25.2" },
     { name = "django-parler", specifier = ">=2.3" },
+    { name = "django-parler-rest", specifier = ">=2.2" },
     { name = "djangorestframework", specifier = ">=3.17.1" },
     { name = "djangorestframework-simplejwt", specifier = ">=5.5.1" },
     { name = "drf-spectacular", specifier = ">=0.29.0" },
