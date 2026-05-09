@@ -24,7 +24,7 @@ class LandingPageService:
         hero_data = HeroSectionSerializer(hero, context={"request": request}).data if hero else None
 
         # 2. Tour Packages (Active)
-        tours = TourPackage.objects.filter(is_active=True).prefetch_related("translations")
+        tours = TourPackage.objects.filter(is_active=True).prefetch_related("translations")[:14]
         tours_data = TourPackageSerializer(tours, many=True, context={"request": request}).data
 
         # 3. Popular Destinations (Active)
