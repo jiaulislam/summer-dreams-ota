@@ -230,16 +230,20 @@ ADMIN_USER_LANGUAGE_SWITCHER = True
 
 STATIC_URL = "static/"
 
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 
 # Parler (Translations)
 PARLER_LANGUAGES = {
-    None: (
-        {"code": "en"},
-        {"code": "es"},
+    1: ( 
+        {'code': 'en'},
+        {'code': 'es'},
     ),
     "default": {
         "fallback": "en",
         "hide_untranslated": False,
     },
 }
+PARLER_DEFAULT_ACTIVATE = True
