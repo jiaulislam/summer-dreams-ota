@@ -264,6 +264,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+USE_THOUSAND_SEPARATOR = True
+
 # Define the languages your admin portal will support
 LANGUAGES = [
     ("en", _("English")),
