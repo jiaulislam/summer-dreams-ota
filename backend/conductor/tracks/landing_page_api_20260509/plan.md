@@ -10,28 +10,12 @@ Setting up the new app and installing dependencies.
     - [x] Add `django-parler` to `pyproject.toml`
     - [x] Add `parler` to `INSTALLED_APPS`
     - [x] Configure `PARLER_LANGUAGES` in `core/settings.py`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Environment & Scaffolding' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Environment & Scaffolding' (Protocol in workflow.md)
 
 ## Phase 2: Data Models & Admin
 Implementing the translatable models and singleton logic.
 
-- [ ] Task: Implement HeroSection model (Singleton, Translatable)
-    - [ ] Write tests for HeroSection model
-    - [ ] Implement HeroSection model
-    - [ ] Register in Admin with singleton logic
-- [ ] Task: Implement TourPackage and PopularDestination models (Translatable)
-    - [ ] Write tests for TourPackage and PopularDestination models
-    - [ ] Implement models
-    - [ ] Register in Admin
-- [ ] Task: Implement WhyChooseUs and WhyChooseUsItem models (Translatable)
-    - [ ] Write tests for WhyChooseUs and WhyChooseUsItem models
-    - [ ] Implement models
-    - [ ] Register in Admin
-- [ ] Task: Implement AgencySetting model (Singleton)
-    - [ ] Write tests for AgencySetting model
-    - [ ] Implement model
-    - [ ] Register in Admin
-- [ ] Task: Create and apply migrations
+- [x] Task: Implement Phase 2: Data Models & Admin [e76a951]
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Data Models & Admin' (Protocol in workflow.md)
 
 ## Phase 3: Serializers & Flattening Logic
