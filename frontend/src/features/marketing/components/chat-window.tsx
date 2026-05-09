@@ -9,6 +9,8 @@ import { getChatSession, setChatSession, generateSessionId, type ChatSession } f
 import { ChatIntroForm } from "./chat-intro-form";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { sendChatMessage, pollChatMessages } from "../api/telegram";
+import Image from "next/image";
+import logoImg from "../../../../public/summer_dreams.jpg";
 
 interface Message {
   id: string | number;
@@ -118,8 +120,13 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
       {/* Header */}
       <div className="p-4 bg-brand-primary text-white flex items-center justify-between shadow-lg z-10">
         <div className="flex items-center space-x-3">
-          <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center border border-white/10">
-            <span className="font-bold">SD</span>
+          <div className="h-10 w-10 rounded-full bg-white overflow-hidden relative">
+            <Image
+              src={logoImg}
+              alt="Summer Dreams Logo"
+              placeholder="blur"
+              className="object-contain p-1"
+            />
           </div>
           <div>
             <h3 className="font-bold text-sm tracking-tight">Summer Dreams Support</h3>

@@ -24,7 +24,7 @@ export function ChatIntroForm({ onSubmit }: ChatIntroFormProps) {
   return (
     <div className="flex flex-col h-full bg-white p-6 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="space-y-2 text-center">
-        <h3 className="text-xl font-bold text-gray-900 tracking-tight">Welcome to Summer Dreams!</h3>
+        <h3 className="text-xl font-bold text-gray-900 tracking-tight">Welcome to Summer Dreams Travel!</h3>
         <p className="text-sm text-gray-500">Please provide your details to start chatting with our support team.</p>
       </div>
 

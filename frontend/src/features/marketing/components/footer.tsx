@@ -2,6 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import Image from "next/image";
+import logoImg from "../../../../public/summer_dreams.jpg";
 import {
   Globe,
   Send,
@@ -54,8 +56,16 @@ export function Footer({ agency }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1: Brand & Info */}
           <div className="space-y-6">
-            <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold tracking-tighter">
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative h-12 w-12 rounded-full overflow-hidden bg-white">
+                <Image
+                  src={logoImg}
+                  alt="Summer Dreams Logo"
+                  placeholder="blur"
+                  className="object-contain p-1"
+                />
+              </div>
+              <span className="text-2xl font-bold tracking-tighter group-hover:text-brand-accent transition-colors">
                 SUMMER<span className="text-brand-accent">DREAMS</span>
               </span>
             </Link>
