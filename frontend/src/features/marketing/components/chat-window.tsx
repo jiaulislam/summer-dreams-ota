@@ -35,11 +35,11 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
     queryFn: async () => {
       if (!session) return [];
       const response = await pollChatMessages(session.sessionId);
-      
+
       // Handle the Django backend response structure
       // We expect an array of messages or { success: true, messages: [...] }
       const messageList = Array.isArray(response) ? response : (response.messages || []);
-      
+
       return messageList.map((m: any) => ({
         id: m.id || Math.random(),
         text: m.message_text || m.text || "",
@@ -172,7 +172,7 @@ export function ChatWindow({ onClose }: ChatWindowProps) {
                 </div>
               </div>
             ))}
-            
+
             {/* Optimistic UI or Pending State for sent messages */}
             {sendMutation.isPending && sendMutation.variables?.type === "message" && (
               <div className="flex w-full justify-end opacity-50">
