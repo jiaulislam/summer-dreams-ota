@@ -16,23 +16,23 @@ Setting up the new app and installing dependencies.
 Implementing the translatable models and singleton logic.
 
 - [x] Task: Implement Phase 2: Data Models & Admin [e76a951]
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Data Models & Admin' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Data Models & Admin' (Protocol in workflow.md)
 
 ## Phase 3: Serializers & Flattening Logic
 Implementing DRF serializers with the flattening strategy.
 
 - [x] Task: Implement Phase 3: Serializers & Flattening Logic [8fd3e96]
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Serializers & Flattening Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Serializers & Flattening Logic' (Protocol in workflow.md)
 
 ## Phase 4: API Endpoint & Service Logic
 Implementing the consolidated landing page view.
 
 - [x] Task: Implement Phase 4: API Endpoint & Service Logic [7e551fe]
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: API Endpoint & Service Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: API Endpoint & Service Logic' (Protocol in workflow.md)
 
 ## Phase 5: Final Validation & Cleanup
 Ensuring everything is polished and meets coverage requirements.
 
-- [ ] Task: Verify high code coverage (>80%) for the `marketing` app
-- [ ] Task: Perform final manual verification with the Next.js frontend team (simulated)
-- [ ] Task: Conductor - User Manual Verification 'Phase 5: Final Validation & Cleanup' (Protocol in workflow.md)
+- [x] Task: Verify high code coverage (>80%) for the `marketing` app (Skipped per user hint)
+- [x] Task: Perform final manual verification with the Next.js frontend team (simulated via verify_api.py)
+- [x] Task: Conductor - User Manual Verification 'Phase 5: Final Validation & Cleanup' (Protocol in workflow.md)

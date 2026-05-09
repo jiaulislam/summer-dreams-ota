@@ -1,3 +1,4 @@
+from parler_rest.fields import TranslatedFieldsField
 from parler_rest.serializers import TranslatableModelSerializer
 from rest_framework import serializers
 
@@ -39,30 +40,39 @@ class FlattenTranslationMixin:
 
 
 class HeroSectionSerializer(FlattenTranslationMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=HeroSection)
+
     class Meta:
         model = HeroSection
         fields = ("title", "subtitle", "background_image", "translations")
 
 
 class TourPackageSerializer(FlattenTranslationMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=TourPackage)
+
     class Meta:
         model = TourPackage
         fields = ("name", "price", "image", "is_active", "order_index", "translations")
 
 
 class PopularDestinationSerializer(FlattenTranslationMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=PopularDestination)
+
     class Meta:
         model = PopularDestination
         fields = ("name", "description", "image", "is_active", "order_index", "translations")
 
 
 class WhyChooseUsItemSerializer(FlattenTranslationMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=WhyChooseUsItem)
+
     class Meta:
         model = WhyChooseUsItem
         fields = ("icon_slug", "title", "description", "order_index", "translations")
 
 
 class WhyChooseUsSerializer(FlattenTranslationMixin, TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=WhyChooseUs)
     items = WhyChooseUsItemSerializer(many=True, read_only=True)
 
     class Meta:

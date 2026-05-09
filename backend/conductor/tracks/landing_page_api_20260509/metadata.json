@@ -1,0 +1,8 @@
+{
+  "track_id": "landing_page_api_20260509",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-05-09T10:00:00Z",
+  "updated_at": "2026-05-09T10:00:00Z",
+  "description": "Implement a single-endpoint API that returns all marketing content for the landing page with dynamic translations."
+}
