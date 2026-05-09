@@ -237,9 +237,9 @@ CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 
 # Parler (Translations)
 PARLER_LANGUAGES = {
-    1: ( 
-        {'code': 'en'},
-        {'code': 'es'},
+    1: (
+        {"code": "en"},
+        {"code": "es"},
     ),
     "default": {
         "fallback": "en",
