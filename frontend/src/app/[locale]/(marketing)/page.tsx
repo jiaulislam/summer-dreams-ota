@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getLandingPageData } from "@/features/marketing/api";
 import { Hero } from "@/features/marketing/components/hero";
 import { TourPackages } from "@/features/marketing/components/tour-packages";
-import { PopularDestinations } from "@/features/marketing/components/popular-destinations";
+// import { PopularDestinations } from "@/features/marketing/components/popular-destinations";
 import { WhyChooseUs } from "@/features/marketing/components/why-choose-us";
 import { Footer } from "@/features/marketing/components/footer";
 import { Navbar } from "@/features/marketing/components/navbar";
@@ -34,7 +34,7 @@ export default function HomePage() {
         <Hero />
         <main className="grow">
           <TourPackages />
-          <PopularDestinations />
+          {/* <PopularDestinations /> */}
           <WhyChooseUs />
         </main>
         <Footer />
@@ -49,7 +49,7 @@ export default function HomePage() {
       <Hero data={data.hero} />
       <main className="grow">
         <TourPackages tours={data.tours} />
-        <PopularDestinations destinations={data.destinations} />
+        {/* <PopularDestinations destinations={data.destinations} /> */}
         <WhyChooseUs data={data.why_choose_us} />
       </main>
       <Footer agency={data.agency} />
