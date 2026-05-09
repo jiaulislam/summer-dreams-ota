@@ -27,7 +27,7 @@ The goal of this track is to create a new "Contact Us" page and link it from the
 - **Performance:** Keep the page lean and ensure it fits within the Next.js App Router architecture.
 
 ## 4. Acceptance Criteria
-- [ ] The Contact Us page is accessible via the `/contact` (localized) route.
+- [ ] The Contact Us page is accessible via the `/contact-us` (localized) route.
 - [ ] The link in the footer successfully navigates to the Contact Us page.
 - [ ] The page displays the form, company contact information, and a WhatsApp redirect button.
 - [ ] The form contains Name, Email, Phone, and Message fields.
