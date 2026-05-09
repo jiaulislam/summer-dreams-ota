@@ -8,37 +8,38 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Loader2, Send } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { submitContactForm } from "../api";
 
 export function ContactForm() {
   const t = useTranslations("Contact");
-  const [loading, setLoading] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: submitContactForm,
+    onSuccess: (data) => {
+      toast.success(data.message || t("success"));
+    },
+    onError: () => {
+      toast.error(t("error"));
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
 
     const formData = new FormData(e.currentTarget);
     const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      message: formData.get("message"),
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      phone: formData.get("phone") as string,
+      message: formData.get("message") as string,
     };
 
-    // This will be replaced with real API call in Phase 3
-    console.log("Contact form submission:", data);
-
-    try {
-      // Simulating API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      toast.success(t("success"));
-      (e.target as HTMLFormElement).reset();
-    } catch (error) {
-      toast.error(t("error"));
-    } finally {
-      setLoading(false);
-    }
+    mutation.mutate(data);
+    (e.target as HTMLFormElement).reset();
   };
+
+  const loading = mutation.isPending;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
