@@ -27,12 +27,7 @@ Implementing DRF serializers with the flattening strategy.
 ## Phase 4: API Endpoint & Service Logic
 Implementing the consolidated landing page view.
 
-- [ ] Task: Implement LandingPageService
-    - [ ] Write tests for `LandingPageService` (verify data consolidation and language handling)
-    - [ ] Implement service logic to fetch and consolidate data
-- [ ] Task: Implement LandingPageAPIView
-    - [ ] Write tests for `LandingPageAPIView` (verify endpoint response and translations)
-    - [ ] Implement `LandingPageAPIView` at `/api/v1/marketing/landing-page/`
+- [x] Task: Implement Phase 4: API Endpoint & Service Logic [7e551fe]
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: API Endpoint & Service Logic' (Protocol in workflow.md)
 
 ## Phase 5: Final Validation & Cleanup
