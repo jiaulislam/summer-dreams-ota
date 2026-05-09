@@ -12,7 +12,7 @@ The main objective is to serve as a performant **Content & Marketing** site driv
 ## Key Feature Focus
 The most critical feature to highlight is **Multilingual Support**. The application utilizes `next-intl` to provide a seamless localized experience for international users across different regions.
 
-Additionally, the platform features a **Live Support Integration** via Telegram, allowing real-time communication between travelers and the agency support team. This integration includes **Lead Capture** and **Individual Session Tracking** to ensure user privacy and efficient follow-up.
+Additionally, the platform features a **Live Support Integration** via Telegram and WhatsApp, allowing real-time communication between travelers and the agency support team. This integration includes **Lead Capture** and **Individual Session Tracking** to ensure user privacy and efficient follow-up.
 
 ## Success Metric
 Success will be measured by **User Engagement**, specifically tracking how frequently users return and how much time they spend exploring travel options, itineraries, and localized marketing content.
