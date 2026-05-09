@@ -66,7 +66,7 @@ export function Footer({ agency }: FooterProps) {
                 />
               </div>
               <span className="text-2xl font-bold tracking-tighter group-hover:text-brand-accent transition-colors">
-                SUMMER<span className="text-brand-accent">DREAMS</span>
+                SUMMER<span className="text-brand-accent">DREAMS</span> <span>TRAVEL</span>
               </span>
             </Link>
             <div className="space-y-4 text-gray-400">
@@ -119,7 +119,10 @@ export function Footer({ agency }: FooterProps) {
             <ul className="space-y-4 text-gray-400">
               {["aboutUs", "blogs", "contact"].map((key) => (
                 <li key={key}>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link
+                    href={key === "contact" ? "/contact-us" : "#"}
+                    className="hover:text-white transition-colors"
+                  >
                     {t(key)}
                   </Link>
                 </li>
