@@ -1,3 +1,9 @@
+import logging
+
+from django.core.mail import send_mail
+from django.db import transaction
+
+from summer_dreams_ota.marketing.errors import EmailSendError
 from summer_dreams_ota.marketing.models import (
     AgencySetting,
     HeroSection,
@@ -7,11 +13,14 @@ from summer_dreams_ota.marketing.models import (
 )
 from summer_dreams_ota.marketing.serializers import (
     AgencySettingSerializer,
+    ContactInquirySerializer,
     HeroSectionSerializer,
     PopularDestinationSerializer,
     TourPackageSerializer,
     WhyChooseUsSerializer,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class LandingPageService:
@@ -46,3 +55,41 @@ class LandingPageService:
             "why_choose_us": why_us_data,
             "agency": agency_data,
         }
+
+
+class ContactInquiryService:
+    """Service to handle contact form inquiries."""
+
+    @staticmethod
+    @transaction.atomic
+    def create_contact_inquiry(data: dict) -> None:
+        """
+        Creates a ContactInquiry record and sends an email to the agency.
+        """
+        serializer = ContactInquirySerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        inquiry = serializer.save()
+
+        # Send email
+        agency_settings = AgencySetting.objects.first()
+        recipient_email = agency_settings.email if agency_settings else "contact@summerdreams.com"
+
+        subject = f"New Contact Inquiry from {inquiry.name}"
+        message = (
+            f"Name: {inquiry.name}\n"
+            f"Email: {inquiry.email}\n"
+            f"Phone: {inquiry.phone or 'N/A'}\n\n"
+            f"Message:\n{inquiry.message}"
+        )
+
+        try:
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=None,  # Uses DEFAULT_FROM_EMAIL
+                recipient_list=[recipient_email],
+                fail_silently=False,
+            )
+        except Exception as e:
+            logger.exception("Failed to send contact inquiry email")
+            raise EmailSendError() from e

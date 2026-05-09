@@ -3,6 +3,8 @@ from parler.models import TranslatableModel, TranslatedFields
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from summer_dreams_ota.shared.models import BaseModel
+
 
 class MarketingSingletonModel(models.Model):
     """Abstract base class for marketing models that should only have one instance."""
@@ -132,3 +134,20 @@ class AgencySetting(MarketingSingletonModel):
 
     def __str__(self):
         return str(_("Agency Settings"))
+
+
+class ContactInquiry(BaseModel):
+    """Model to store contact form inquiries."""
+
+    name = models.CharField(_("Name"), max_length=255)
+    email = models.EmailField(_("Email"))
+    phone = models.CharField(_("Phone"), max_length=50, blank=True)
+    message = models.TextField(_("Message"))
+
+    class Meta:
+        verbose_name = _("Contact Inquiry")
+        verbose_name_plural = _("Contact Inquiries")
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"
