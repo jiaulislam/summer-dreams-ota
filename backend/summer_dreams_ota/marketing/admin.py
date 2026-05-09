@@ -4,6 +4,7 @@ from django.contrib import admin
 
 from summer_dreams_ota.marketing.models import (
     AgencySetting,
+    ContactInquiry,
     HeroSection,
     PopularDestination,
     TourPackage,
@@ -75,4 +76,19 @@ class AgencySettingAdmin(admin.ModelAdmin):
         return super().has_add_permission(_request)
 
     def has_delete_permission(self, _request, _obj=None):
+        return False
+
+
+@admin.register(ContactInquiry)
+class ContactInquiryAdmin(admin.ModelAdmin):
+    """Admin for ContactInquiry."""
+
+    list_display = ("name", "email", "phone", "created_at")
+    list_filter = ("created_at",)
+    search_fields = ("name", "email", "message")
+    readonly_fields = ("created_at", "updated_at")
+    ordering = ("-created_at",)
+
+    def has_add_permission(self, _request):
+        # Inquiries should only be created via the API
         return False
