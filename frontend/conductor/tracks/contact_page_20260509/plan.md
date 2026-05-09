@@ -6,13 +6,13 @@
 
 ## Phase 2: UI Implementation
 - [x] Task: Create the new localized page route `src/app/[locale]/(marketing)/contact-us/page.tsx`. 8185817
-- [ ] Task: Build the `ContactForm` component (`src/features/marketing/components/contact-form.tsx`) with Name, Email, Phone, and Message fields, including client-side validation using `zod` and `react-hook-form`.
-- [ ] Task: Build the `ContactInfo` component (`src/features/marketing/components/contact-info.tsx`) displaying address, phone, email, and a styled WhatsApp redirect button (linking to `wa.me`).
-- [ ] Task: Assemble the page layout in `contact-us/page.tsx`, displaying both components responsively.
-- [ ] Task: Update the `Footer` component (`src/features/marketing/components/footer.tsx`) to link the "Contact" link to the new `/contact-us` route.
-- [ ] Task: Conductor - User Manual Verification 'UI Implementation' (Protocol in workflow.md)
+- [x] Task: Build the `ContactForm` component (`src/features/marketing/components/contact-form.tsx`) with Name, Email, Phone, and Message fields, following the existing pattern of using native forms and `FormData`. d5f1953
+- [x] Task: Build the `ContactInfo` component (`src/features/marketing/components/contact-info.tsx`) displaying address, phone, email, and a styled WhatsApp redirect button (linking to `wa.me`). d5f1953
+- [x] Task: Assemble the page layout in `contact-us/page.tsx`, displaying both components responsively. d5f1953
+- [x] Task: Update the `Footer` component (`src/features/marketing/components/footer.tsx`) to link the "Contact" link to the new `/contact-us` route. d5f1953
+- [x] Task: Conductor - User Manual Verification 'UI Implementation' (Protocol in workflow.md) d5f1953
 
 ## Phase 3: Integration
-- [ ] Task: Implement the API client function in `src/features/marketing/api/index.ts` to submit the contact form data.
+- [~] Task: Implement the API client function in `src/features/marketing/api/index.ts` to submit the contact form data.
 - [ ] Task: Integrate the API submission into the `ContactForm` component using TanStack Query mutations, handling loading states and displaying success/error toast notifications.
 - [ ] Task: Conductor - User Manual Verification 'Integration' (Protocol in workflow.md)
