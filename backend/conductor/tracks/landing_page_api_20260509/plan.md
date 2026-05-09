@@ -6,10 +6,10 @@ This plan outlines the steps to implement the Multilingual Landing Page API for 
 Setting up the new app and installing dependencies.
 
 - [x] Task: Create the `marketing` app in `summer_dreams_ota/` [7ebdac1]
-- [ ] Task: Install and configure `django-parler`
-    - [ ] Add `django-parler` to `pyproject.toml`
-    - [ ] Add `parler` to `INSTALLED_APPS`
-    - [ ] Configure `PARLER_LANGUAGES` in `core/settings.py`
+- [x] Task: Install and configure `django-parler` [fa6fa43]
+    - [x] Add `django-parler` to `pyproject.toml`
+    - [x] Add `parler` to `INSTALLED_APPS`
+    - [x] Configure `PARLER_LANGUAGES` in `core/settings.py`
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Environment & Scaffolding' (Protocol in workflow.md)
 
 ## Phase 2: Data Models & Admin
