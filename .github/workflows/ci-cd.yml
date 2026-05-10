@@ -4,6 +4,7 @@ on:
   push:
     branches: [ production ]
   pull_request:
+    types: [opened, synchronize, reopened, closed]
     branches: [ production ]
 
 jobs:
@@ -59,7 +60,7 @@ jobs:
 
   deploy:
     needs: [test-backend, test-frontend]
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -78,7 +79,7 @@ jobs:
             docker exec summer_dreams_ota-db-1 pg_dump -U ${DB_USER:-summer_dreams} ${DB_NAME:-summer_dreams_db} | gzip > /home/backups/db_before_deploy_$(date +%F).sql.gz || echo "Backup failed or no DB container running."
 
             echo "Pulling latest code..."
-            git pull origin master
+            git pull origin production
 
             echo "Sequential Build to prevent OOM..."
             docker compose build frontend
