@@ -1,40 +1,72 @@
-FROM python:3.13-slim AS builder
+# --- Stage 1: Builder ---
+FROM python:3.13-slim-bookworm AS builder
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
+# Prevent Python from writing .pyc files
+# UV_LINK_MODE=copy prevents dead symlinks across Docker stages
+# UV_PYTHON_DOWNLOADS=never forces uv to use the container's Python 3.13
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
     UV_COMPILE_BYTECODE=1 \
-    UV_LINK_MODE=copy
+    UV_LINK_MODE=copy \
+    UV_PYTHON_DOWNLOADS=never
 
 WORKDIR /app
 
-# Install uv package manager
-RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates \
-    && curl -LsSf https://astral.sh/uv/install.sh | sh \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Pull the official uv binary
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-ENV PATH="/root/.local/bin:${PATH}"
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies using uv
 COPY pyproject.toml uv.lock ./
+
+# Install dependencies only
 RUN uv sync --frozen --no-dev --no-install-project
 
-# Copy project files and install the project itself
-COPY . .
-RUN uv sync --frozen --no-dev
 
-# Final stage for production image
-FROM python:3.13-slim
+# --- Stage 2: Final Production Image ---
+FROM python:3.13-slim-bookworm
 
-ENV PYTHONUNBUFFERED=1 \
+# Add the virtual environment to the PATH
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
     PATH="/app/.venv/bin:$PATH"
 
 WORKDIR /app
 
-# Copy the built virtual environment and application code from the builder
-COPY --from=builder /app /app
+# Install runtime libraries + gettext
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    gettext \
+    && rm -rf /var/lib/apt/lists/*
 
+# Copy the fully populated .venv from the builder stage
+COPY --from=builder /app/.venv /app/.venv
+
+# Create user and directories
+RUN useradd -m django-user && \
+    mkdir -p /app/staticfiles /app/media && \
+    chown -R django-user:django-user /app
+
+# Copy project code
+COPY --chown=django-user:django-user . .
+
+# Make the entrypoint script executable
+RUN chmod +x /app/entrypoint.sh
+
+# Compile translations
+RUN python manage.py compilemessages
+
+# Switch to the non-root user
+USER django-user
+
+# Port for Gunicorn
 EXPOSE 8000
 
-# Collect static files and apply migrations should ideally be run separately,
-# but for safety, we rely on standard gunicorn startup here.
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "core.wsgi:application"]
+# Set the entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "core.wsgi:application"]

@@ -1,31 +1,27 @@
-{$DOMAIN:localhost} {
-    # Compress responses for better performance
-    encode zstd gzip
+# Frontend on port 80
+:80 {
+    reverse_proxy backend:3000
+}
 
-    # Serve static files directly via Caddy
+# Backend on port 8000
+:8000 {
+    # 1. Static Files (Admin CSS/JS)
     handle_path /static/* {
-        root * /var/www/static
+        root * /app/staticfiles
         file_server
     }
 
-    # Serve media files directly via Caddy
+    # 2. Media Files (User Uploads)
     handle_path /media/* {
-        root * /var/www/media
+        root * /app/media
         file_server
     }
 
-    # Proxy API requests to Django backend
-    handle /api/* {
-        reverse_proxy backend:8000
-    }
+    # 3. Redirect root of 8000 to /admin/
+    redir / /admin/
 
-    # Proxy Admin requests to Django backend
-    handle /admin/* {
+    # 4. All other traffic on 8000 goes to Gunicorn
+    handle {
         reverse_proxy backend:8000
-    }
-
-    # Proxy all other requests to Next.js frontend
-    handle /* {
-        reverse_proxy frontend:3000
     }
 }

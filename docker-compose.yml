@@ -1,54 +1,41 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     restart: always
-    environment:
-      POSTGRES_USER: ${DB_USER:-summer_dreams}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-summer_dreams_pass}
-      POSTGRES_DB: ${DB_NAME:-summer_dreams_db}
+    ports:
+      - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-summer_dreams} -d ${DB_NAME:-summer_dreams_db}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    build: ./backend
     restart: always
-    environment:
-      - DATABASE_URL=postgres://${DB_USER:-summer_dreams}:${DB_PASSWORD:-summer_dreams_pass}@db:5432/${DB_NAME:-summer_dreams_db}
-      - DJANGO_SETTINGS_MODULE=core.settings
-      - SECRET_KEY=${SECRET_KEY:-django-insecure-default-key}
-      - DEBUG=${DEBUG:-False}
-      - ALLOWED_HOSTS=${DOMAIN:-localhost},backend
-      - CORS_ALLOWED_ORIGINS=https://${DOMAIN:-localhost},http://${DOMAIN:-localhost}
-      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
-      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    env_file:
+      - .env
+    volumes:
+      - static_data:/app/staticfiles
+      - media_data:/app/media
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - django_static:/app/staticfiles
-      - django_media:/app/media
-    # Wait for migrations, collect static, then run Gunicorn
-    command: >
-      bash -c "uv run manage.py collectstatic --noinput &&
-               gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 3"
-
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
     restart: always
-    environment:
-      - NEXT_PUBLIC_API_URL=https://${DOMAIN:-localhost}/api
-      - AUTH_SECRET=${AUTH_SECRET:-your-auth-secret-here}
-      - AUTH_GOOGLE_ID=${AUTH_GOOGLE_ID}
-      - AUTH_GOOGLE_SECRET=${AUTH_GOOGLE_SECRET}
+    network_mode: service:backend
+    env_file:
+      - .env
     depends_on:
       - backend
 
@@ -56,23 +43,22 @@ services:
     image: caddy:2-alpine
     restart: always
     ports:
-      - "80:80"
+      - "80:80" # frontend entry
       - "443:443"
-    environment:
-      - DOMAIN=${DOMAIN:-localhost}
+      - "8000:8000" # Backend entry
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-      - django_static:/var/www/static
-      - django_media:/var/www/media
+      - static_data:/app/staticfiles
+      - media_data:/app/media
     depends_on:
-      - backend
       - frontend
+      - backend
 
 volumes:
   postgres_data:
-  django_static:
-  django_media:
   caddy_data:
   caddy_config:
+  static_data:
+  media_data:

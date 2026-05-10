@@ -26,7 +26,6 @@ coverage.xml
 
 # uv (Astral)
 .uv
-uv.lock
 
 # Django
 local_settings.py
