@@ -64,7 +64,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-u_(_y%9x@_u5ev*0&moui%qpq===7g)t78s*9_(67bweeny@ef"
+SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-u_(_y%9x@_u5ev*0&moui%qpq===7g)t78s*9_(67bweeny@ef")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
@@ -181,8 +181,8 @@ SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APPS": [
             {
-                "client_id": os.getenv("GOOGLE_OAUTH_CLIENT_ID"),
-                "secret": os.getenv("GOOGLE_OAUTH_CLIENT_SECRET"),
+                "client_id": os.getenv("AUTH_GOOGLE_ID"),
+                "secret": os.getenv("AUTH_GOOGLE_SECRET"),
                 "key": "",
             },
         ],
@@ -227,7 +227,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.environ.get("DB_NAME", ""),
         "USER": os.environ.get("DB_USER", ""),
-        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
+        "PASSWORD": os.environ.get("DB_PASS", ""),
         "HOST": os.environ.get("DB_HOST", ""),
         "PORT": os.environ.get("DB_PORT", 5432),
     }
