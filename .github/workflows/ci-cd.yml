@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [ production ]
   pull_request:
-    branches: [ master, main ]
+    branches: [ production ]
 
 jobs:
   test-backend:
@@ -83,9 +83,6 @@ jobs:
             echo "Sequential Build to prevent OOM..."
             docker compose build frontend
             docker compose build backend
-
-            echo "Running Pre-Deploy Migrations..."
-            docker compose run --rm backend uv run manage.py migrate
 
             echo "Restarting Services..."
             docker compose up -d
